@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Bookcase</title>
+    <title>BookCase</title>
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>

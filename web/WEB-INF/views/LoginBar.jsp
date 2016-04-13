@@ -20,7 +20,6 @@
     <article id="header">
         <c:if test="${empty user}">
             <c:url value="/login" var="x"/>
-
             <form:form class="form" action="${x}"  method="post" modelAttribute="LoginForm">
 
                 <form:input path="username" placeholder = "${unPlaceholder}"/>
@@ -32,7 +31,6 @@
             </form:form>
         </c:if>
 
-
         <c:if test="${!empty user}">
             <c:url value="/logout" var="y"/>
             <c:url value="/user/" var="z"/>
@@ -41,12 +39,6 @@
                 <button type="submit", name="url", value="${address}">Logout</button>
             </form:form>
         </c:if>
-
-
-
-
     </article>
-
-
 </body>
 </html>
