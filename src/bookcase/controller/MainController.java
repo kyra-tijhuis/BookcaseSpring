@@ -5,28 +5,24 @@ package bookcase.controller;
  */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import bookcase.forms.LoginForm;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MainController {
 
-    @RequestMapping("/index")
+    @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
 
         prepareLoginBar(request, error);
         return "MainScreen";
     }
+
+
+
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(LoginForm login, HttpSession session, RedirectAttributes redirectAttributes){
@@ -47,25 +43,42 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value={"/login", "/logout"}, method=RequestMethod.GET)
-    public String loginGet(){
-        return "redirect:/index";
-    }
-
-
     @RequestMapping(value="/logout", method=RequestMethod.POST)
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return "redirect:" + request.getParameter("url");
     }
 
+    @RequestMapping(value={"/login", "/logout"}, method=RequestMethod.GET)
+    public String loginGet(){
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value="search", method=RequestMethod.POST)
+    public String search(HttpServletRequest request, @ModelAttribute("error") String error) {
+        prepareLoginBar(request, error);
+        return "SearchResults";
+    }
+
+
+
+
+
+
+
 
     @RequestMapping("/user/*")
     public String user(HttpServletRequest request, @ModelAttribute("error") String error) {
         String url = request.getRequestURL().toString();
         request.setAttribute("username", url.substring(url.lastIndexOf("/")+1));
-        prepareLoginBar(request, error);
-        return "User";
+        if (request.getAttribute("username").equals("Kyra")) {
+            prepareLoginBar(request, error);
+            return "User";
+        } else {
+            prepareLoginBar(request, error);
+            return "InvalidUser";
+        }
+
     }
 
 
@@ -77,6 +90,7 @@ public class MainController {
     public LoginForm createLoginForm() {
         return new LoginForm();
     }
+
 
 
     // preparation of loginbar by giving possible errors and the url of source page

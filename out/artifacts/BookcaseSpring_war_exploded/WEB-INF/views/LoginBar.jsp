@@ -34,7 +34,7 @@
         <c:if test="${!empty user}">
             <c:url value="/logout" var="y"/>
             <c:url value="/user/" var="z"/>
-            <a id="loggedUser" href="${z}${user}">KKKKKKKKKKKKKKKKKKKKKKKKKKKK</a>
+            <a id="loggedUser" href="${z}${user}">${user}</a>
             <form:form id="logoutForm" class="form" action="${y}" method="post">
                 <button type="submit", name="url", value="${address}">Logout</button>
             </form:form>

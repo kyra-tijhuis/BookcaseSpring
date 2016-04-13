@@ -13,7 +13,7 @@
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
-    <p>Dit is ${username}'s pagina</p>
-    <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
+<p>Deze user bestaat niet!</p>
+<a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
 </body>
 </html>

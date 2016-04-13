@@ -1,0 +1,35 @@
+body {
+    background-color: white;
+}
+
+#mainscreen {
+    background-color: lightgoldenrodyellow;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 500px;
+
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+#mainscreen h1 {
+    display: inline;
+    font-family: Arial;
+    font-size: 30px;
+    margin-left: 20%;
+}
+
+#mainscreen #form {
+    display: inline-block;
+    position: absolute;
+    right: 11%;
+    margin-top: 0px;
+}
+
+#mainscreen p {
+    margin-left: 12px;
+}

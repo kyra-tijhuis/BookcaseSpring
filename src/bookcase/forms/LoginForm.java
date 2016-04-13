@@ -10,10 +10,9 @@ public class LoginForm {
 
 
 
-    @NotEmpty
+
     private String username;
 
-    @NotEmpty
     private String password;
 
     private String url;
