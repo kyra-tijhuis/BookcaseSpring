@@ -28,14 +28,11 @@ public class MainController {
         return "MainScreen";
     }
 
-    @RequestMapping(value="/login", method= RequestMethod.POST)
+    @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(LoginForm login, HttpSession session, RedirectAttributes redirectAttributes){
 
-        if (login.getUsername().equals("Kyra") && login.getPassword().equals("Jelle")) {        // check in database
+        if (login.getUsername().equals("Kyra") && login.getPassword().equals("Jelle")) {        // TODO uit database trekken
             session.setAttribute("user", "Kyra");
-
-
-
 
             return "redirect:" + login.getUrl();
         } else {
@@ -50,11 +47,29 @@ public class MainController {
         }
     }
 
-    @RequestMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        request.getSession().invalidate();
+    @RequestMapping(value={"/login", "/logout"}, method=RequestMethod.GET)
+    public String loginGet(){
         return "redirect:/index";
     }
+
+
+    @RequestMapping(value="/logout", method=RequestMethod.POST)
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:" + request.getParameter("url");
+    }
+
+
+    @RequestMapping("/user/*")
+    public String user(HttpServletRequest request, @ModelAttribute("error") String error) {
+        String url = request.getRequestURL().toString();
+        request.setAttribute("username", url.substring(url.lastIndexOf("/")+1));
+        prepareLoginBar(request, error);
+        return "User";
+    }
+
+
+
 
 
 

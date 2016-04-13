@@ -19,7 +19,9 @@
 <body>
     <article id="header">
         <c:if test="${empty user}">
-            <form:form class="form" action="login" method="post" modelAttribute="LoginForm">
+            <c:url value="/login" var="x"/>
+
+            <form:form class="form" action="${x}"  method="post" modelAttribute="LoginForm">
 
                 <form:input path="username" placeholder = "${unPlaceholder}"/>
 
@@ -31,10 +33,11 @@
         </c:if>
 
 
-
         <c:if test="${!empty user}">
-            <a id="loggedUser" href="user/${user}">${user}</a>
-            <form:form id="logoutForm" class="form" action="logout" method="post">
+            <c:url value="/logout" var="y"/>
+            <c:url value="/user/" var="z"/>
+            <a id="loggedUser" href="${z}${user}">${user}</a>
+            <form:form id="logoutForm" class="form" action="${y}" method="post">
                 <button type="submit", name="url", value="${address}">Logout</button>
             </form:form>
         </c:if>
