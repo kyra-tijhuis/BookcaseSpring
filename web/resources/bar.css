@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+body {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#header {
+    height: 50px;
+    border-bottom-style: solid;
+    background-image: url("JK.png");
+    background-repeat: repeat-x;
+    background-size: auto;
+    background-position: left;
+}
+
+.form {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form input {
+    width: 120px;
+}
+
+.form input:first-of-type {
+    margin-left: 10px;
+}
+
+.form button {
+    background-color: lightgoldenrodyellow;
+    border-color: black;
+    border-width: 3px;
+    border-style: double;
+}
+
+.form input{
+    border-style: solid;
+    border-color: black
+}
+
+#logoutForm {
+    position: absolute;
+    left: 140px;
+    display: inline;
+}
+
+#loggedUser {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 120px;
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+}

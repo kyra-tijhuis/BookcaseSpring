@@ -14,15 +14,16 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="bar.css"> <%--TODO make link working--%>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/bar.css"/> <%--TODO make link working--%>
 </head>
 <body>
-         <c:if test="${empty user}">
-            <form:form action="login" method="post" modelAttribute="LoginForm">
+    <article id="header">
+        <c:if test="${empty user}">
+            <form:form class="form" action="login" method="post" modelAttribute="LoginForm">
 
-                <form:input path="username" placeholder = "username"/>
+                <form:input path="username" placeholder = "${unPlaceholder}"/>
 
-                <form:password path="password" placeholder = "password"/>
+                <form:password path="password" placeholder = "${pwPlaceholder}"/>
 
                 <form:input path="url" type="hidden" value="${address}" />
                 <button type="submit">Login</button>
@@ -32,8 +33,8 @@
 
 
         <c:if test="${!empty user}">
-            <a href="user/${user}">${user}</a>
-            <form:form action="logout" method="post">
+            <a id="loggedUser" href="user/${user}">${user}</a>
+            <form:form id="logoutForm" class="form" action="logout" method="post">
                 <button type="submit", name="url", value="${address}">Logout</button>
             </form:form>
         </c:if>

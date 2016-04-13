@@ -23,8 +23,8 @@ public class MainController {
 
     @RequestMapping("/index")
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
-        request.setAttribute("address", request.getRequestURL());
 
+        prepareLoginBar(request, error);
         return "MainScreen";
     }
 
@@ -65,5 +65,18 @@ public class MainController {
 
 
     // preparation of loginbar by giving possible errors and the url of source page
+    public void prepareLoginBar(HttpServletRequest request, String error) {
+        request.setAttribute("address", request.getRequestURL());
+        if (error.equals("password")) {
+            request.setAttribute("pwPlaceholder", "Invalid Password!");
+            request.setAttribute("unPlaceholder", "username");
+        } else if (error.equals("username")) {
+            request.setAttribute("pwPlaceholder", "password");
+            request.setAttribute("unPlaceholder", "User does not exist!");
+        } else {
+            request.setAttribute("pwPlaceholder", "password");
+            request.setAttribute("unPlaceholder", "username");
+        }
 
+    }
 }
