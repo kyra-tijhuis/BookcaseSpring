@@ -17,24 +17,19 @@
     <link rel="stylesheet" href="bar.css"> <%--TODO make link working--%>
 </head>
 <body>
-    <article>
-        <c:if test="${empty user}">
+         <c:if test="${empty user}">
             <form:form action="login" method="post" modelAttribute="LoginForm">
-                <form:label path="username">
-                    Username <form:errors path="username" cssClass="error" />
-                </form:label>
-                <form:input path="username" />
 
-                <form:label path="password">
-                    Password <form:errors path="password" cssClass="error" />
-                </form:label>
-                <form:password path="password" />
+                <form:input path="username" placeholder = "username"/>
+
+                <form:password path="password" placeholder = "password"/>
 
                 <form:input path="url" type="hidden" value="${address}" />
-
                 <button type="submit">Login</button>
             </form:form>
         </c:if>
+
+
 
         <c:if test="${!empty user}">
             <a href="user/${user}">${user}</a>

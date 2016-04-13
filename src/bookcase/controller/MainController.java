@@ -22,13 +22,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MainController {
 
     @RequestMapping("/index")
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
         request.setAttribute("address", request.getRequestURL());
-        return "LoginBar";
+
+        return "MainScreen";
     }
 
     @RequestMapping(value="/login", method= RequestMethod.POST)
-    public String login(LoginForm login, HttpSession session, Model model){
+    public String login(LoginForm login, HttpSession session, RedirectAttributes redirectAttributes){
 
         if (login.getUsername().equals("Kyra") && login.getPassword().equals("Jelle")) {        // check in database
             session.setAttribute("user", "Kyra");
@@ -38,11 +39,22 @@ public class MainController {
 
             return "redirect:" + login.getUrl();
         } else {
+            if (login.getUsername().equals("Kyra")) {
+                redirectAttributes.addFlashAttribute("error", "password");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "username");
+            }
+
+
             return "redirect:" + login.getUrl();
         }
     }
 
-
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/index";
+    }
 
 
 
@@ -50,4 +62,8 @@ public class MainController {
     public LoginForm createLoginForm() {
         return new LoginForm();
     }
+
+
+    // preparation of loginbar by giving possible errors and the url of source page
+
 }
