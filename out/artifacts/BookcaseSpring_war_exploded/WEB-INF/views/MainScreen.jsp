@@ -22,11 +22,11 @@
 <body>
     <article id="mainscreen">
         <h1>Kyra en Jelle's wilde boekenkasten!</h1>
-        <form:form id="form" action="/search" method="get">
-            <input type="text" name="query" placeholder="find bookcase..."/>
-            <button type="submit">Search</button>
+        <form:form id="form" action="/search" method="get" modelAttribute="SearchForm">
+            <form:input path="bookcaseName" placeholder="find bookcase name..."/>
+            <form:button type="submit">Search</form:button>
         </form:form>
-        ${query}
+
         <p>hallo, ik ben een pagina!</p>
     </article>
 

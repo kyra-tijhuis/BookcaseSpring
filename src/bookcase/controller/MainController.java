@@ -5,9 +5,13 @@ package bookcase.controller;
  */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import bookcase.forms.LoginForm;
+import bookcase.forms.SearchForm;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -56,9 +60,18 @@ public class MainController {
 
 
 
-    @RequestMapping(value="/search", method=RequestMethod.GET)
-    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error) {
+    @RequestMapping(value="/search")
+    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @Valid SearchForm query, BindingResult result, Model m) {
         prepareLoginBar(request, error);
+
+        if (result.hasErrors()) {
+            System.out.println("test");
+            return "SearchResults";
+        }
+
+        // show search results
+        System.out.println(query.getBookcaseName());
+
         return "SearchResults";
     }
 
@@ -95,6 +108,10 @@ public class MainController {
     }
 
     @ModelAttribute("SearchForm")
+    public SearchForm createSearchForm() {
+        return new SearchForm();
+    }
+
 
     // preparation of loginbar by giving possible errors and the url of source page
     public void prepareLoginBar(HttpServletRequest request, String error) {

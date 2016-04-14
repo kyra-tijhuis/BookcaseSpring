@@ -20,9 +20,21 @@
         <p> Zoekresultaten voor de term ${param.query}
 
             <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
-
-            <a href="<c:url value="/search"/>">Extended search</a>
         </p>
+        <p>
+            <form:form method="get" modelAttribute="SearchForm">
+                <form:input path="bookcaseName" type="text"/><br>
+                <form:errors path="bookcaseName" cssClass="error" /><br>
+                <form:input path="username" type="text"/><br>
+                <form:errors path="username" cssClass="error" /><br>
+                <form:input path="bookName" type="text"/><br>
+                <form:errors path="bookName" cssClass="error" /><br>
+                <form:button type="submit">Search</form:button>
+            </form:form>
+            
+            
+        </p>
+        
     </article>
 </body>
 </html>
