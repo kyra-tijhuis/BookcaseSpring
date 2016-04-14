@@ -12,13 +12,17 @@
 <html>
 <head>
     <title>BookCase</title>
-    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/main.css"/>
+
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/mainscreen.css" />/>
     <jsp:include page="LoginBar.jsp" />
+
+
 </head>
 <body>
     <article id="mainscreen">
         <h1>Kyra en Jelle's wilde boekenkasten!</h1>
-        <form:form id="form" action="/search" method="post">
+        <form:form id="form" action="/search" method="get">
             <input type="text" name="query" placeholder="find bookcase..."/>
             <button type="submit">Search</button>
         </form:form>

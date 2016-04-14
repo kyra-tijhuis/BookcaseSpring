@@ -16,20 +16,6 @@ body {
     padding-top: 10px;
 }
 
-#mainscreen h1 {
-    display: inline;
-    font-family: Arial;
-    font-size: 30px;
-    margin-left: 20%;
-}
-
-#mainscreen #form {
-    display: inline-block;
-    position: absolute;
-    right: 11%;
-    margin-top: 0px;
-}
-
 #mainscreen p {
     margin-left: 12px;
 }

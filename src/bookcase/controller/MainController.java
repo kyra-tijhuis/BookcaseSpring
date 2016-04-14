@@ -54,11 +54,14 @@ public class MainController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value="search", method=RequestMethod.POST)
-    public String search(HttpServletRequest request, @ModelAttribute("error") String error) {
+
+
+    @RequestMapping(value="/search", method=RequestMethod.GET)
+    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error) {
         prepareLoginBar(request, error);
         return "SearchResults";
     }
+
 
 
 
@@ -91,7 +94,7 @@ public class MainController {
         return new LoginForm();
     }
 
-
+    @ModelAttribute("SearchForm")
 
     // preparation of loginbar by giving possible errors and the url of source page
     public void prepareLoginBar(HttpServletRequest request, String error) {

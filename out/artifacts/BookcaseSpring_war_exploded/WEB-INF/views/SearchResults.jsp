@@ -12,10 +12,17 @@
 <html>
 <head>
     <title>BookCase</title>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
-    <p>Zoekresultaten voor de term ${query}</p>
-    <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
+    <article id="mainscreen">
+        <p> Zoekresultaten voor de term ${param.query}
+
+            <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
+
+            <a href="<c:url value="/search"/>">Extended search</a>
+        </p>
+    </article>
 </body>
 </html>

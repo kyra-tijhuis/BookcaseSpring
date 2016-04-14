@@ -10,10 +10,14 @@
 <html>
 <head>
     <title>BookCase</title>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
-<p>Deze user bestaat niet!</p>
-<a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
+    <article id="mainscreen">
+        <p> Deze user bestaat niet!
+            <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
+        </p>
+    </article>
 </body>
 </html>
