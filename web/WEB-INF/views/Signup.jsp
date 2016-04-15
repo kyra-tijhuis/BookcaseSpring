@@ -6,24 +6,29 @@
 <head>
     <title>BookCase</title>
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/signup.css" />/>
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
     <article id="mainscreen">
-        <p>
-            <c:url value="/signup" var="x"/>
-            <form:form action="${x}" method="post" modelAttribute="SignupForm">
-                <form:input path="username" type="text" />  <br>
-                <form:errors path="username" cssClass="error" /><br>
-                <form:password path="password"/><br>
-                <form:errors path="password" cssClass="error" /><br>
-                <form:password path="password2"/><br>
-                <form:errors path="password2" cssClass="error" /><br>
-                <form:button type="submit">Sign Up!</form:button>
+        <p id="formholder">
+            <c:url value="/signup" var="reference"/>
+
+            <form:form id="signupform" action="${reference}" method="post" modelAttribute="SignupForm">
+
+                <form:label class="fieldlabel" path="username">Username:</form:label>
+                <form:input class="field" path="username" type="text" />
+                <form:errors class="fielderror" path="username" /><br>
+                <form:label class="fieldlabel" path="password">Password:</form:label>
+                <form:password class="field" path="password" />
+                <form:errors class="fielderror" path="password" /><br>
+                <form:label class="fieldlabel" path="password2">Confirm password:</form:label>
+                <form:password class="field" path="password2" />
+                <form:errors class="fielderror" path="password2" /><br>
+                <form:button id="signupbutton" type="submit">Sign Up!</form:button>
             </form:form>
-
-
         </p>
+
     </article>
 </body>
 </html>

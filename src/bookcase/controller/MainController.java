@@ -86,7 +86,7 @@ public class MainController {
     }
 
     @RequestMapping(value="/signup", method=RequestMethod.POST)
-    public String signupPost(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SignupForm") @Valid SignupForm userForm, BindingResult result) {
+    public String signupPost(HttpServletRequest request, HttpSession session, @ModelAttribute("error") String error, @ModelAttribute("SignupForm") @Valid SignupForm userForm, BindingResult result) {
         prepareLoginBar(request, error);
 
         if (!(userForm.getPassword()).equals(userForm.getPassword2())) {
@@ -99,7 +99,9 @@ public class MainController {
         }
 
 
-        return "SignupSuccess";
+        session.setAttribute("user", userForm.getUsername());
+
+        return "redirect:/index";
     }
 
 

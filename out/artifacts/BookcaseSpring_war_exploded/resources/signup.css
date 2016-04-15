@@ -1,0 +1,27 @@
+ .field {
+     display:block;
+     width: 100%;
+
+}
+
+ .fieldlabel {
+     font-size: 20px;
+ }
+
+ .fielderror {
+     color: red;
+     text-decoration: underline;
+ }
+ 
+ #signupform {
+     padding: 10px;
+     margin-left: 10%;
+     border: solid black;
+     width: 15%;
+     min-width: 150px;
+ }
+
+ #signupbutton {
+     position: relative;
+     alignment: right;
+ }
