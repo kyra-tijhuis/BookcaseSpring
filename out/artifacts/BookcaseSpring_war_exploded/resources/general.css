@@ -3,6 +3,7 @@ body {
 }
 
 #mainscreen {
+    display: block;
     background-color: lightgoldenrodyellow;
     margin-left: 10%;
     margin-right: 10%;

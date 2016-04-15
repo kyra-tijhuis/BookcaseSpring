@@ -27,7 +27,20 @@
             <form:button type="submit">Search</form:button>
         </form:form>
 
-        <p>hallo, ik ben een pagina!</p>
+        <p>
+            <c:if test="${!empty user}">
+                Hello ${user}!
+            </c:if>
+
+            <c:if test="${empty user}">
+                Welcome guest, search for existing bookcases or <a href="<c:url value="/signup"/>">create an account</a> and share your own bookcases!
+            </c:if>
+        </p>
+
+
+
+
+
     </article>
 
 </body>

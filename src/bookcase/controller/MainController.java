@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import bookcase.forms.LoginForm;
-import bookcase.forms.SearchForm;
+
+import bookcase.forms.SignupForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import bookcase.forms.LoginForm;
+import bookcase.forms.SearchForm;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 public class MainController {
@@ -59,9 +64,8 @@ public class MainController {
     }
 
 
-
     @RequestMapping(value="/search")
-    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @Valid SearchForm query, BindingResult result, Model m) {
+    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query, BindingResult result) {
         prepareLoginBar(request, error);
 
         if (result.hasErrors()) {
@@ -75,8 +79,28 @@ public class MainController {
         return "SearchResults";
     }
 
+    @RequestMapping(value="/signup", method=RequestMethod.GET)
+    public String signup(HttpServletRequest request, @ModelAttribute("error") String error) {
+        prepareLoginBar(request, error);
+        return "Signup";
+    }
+
+    @RequestMapping(value="/signup", method=RequestMethod.POST)
+    public String signupPost(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SignupForm") @Valid SignupForm userForm, BindingResult result) {
+        prepareLoginBar(request, error);
+
+        if (!(userForm.getPassword()).equals(userForm.getPassword2())) {
+            result.addError(new FieldError("userForm", "password2", "Passwords do not match!"));
+            return "Signup";
+        }
+
+        if (result.hasErrors()) {
+            return "Signup";
+        }
 
 
+        return "SignupSuccess";
+    }
 
 
 
@@ -112,6 +136,10 @@ public class MainController {
         return new SearchForm();
     }
 
+    @ModelAttribute("SignupForm")
+    public SignupForm createSignupForm() {
+        return new SignupForm();
+    }
 
     // preparation of loginbar by giving possible errors and the url of source page
     public void prepareLoginBar(HttpServletRequest request, String error) {

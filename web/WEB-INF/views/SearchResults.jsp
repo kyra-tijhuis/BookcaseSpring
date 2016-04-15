@@ -22,15 +22,16 @@
             <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
         </p>
         <p>
-            <form:form method="get" modelAttribute="SearchForm">
-                <form:input path="bookcaseName" type="text"/><br>
-                <form:errors path="bookcaseName" cssClass="error" /><br>
-                <form:input path="username" type="text"/><br>
-                <form:errors path="username" cssClass="error" /><br>
-                <form:input path="bookName" type="text"/><br>
-                <form:errors path="bookName" cssClass="error" /><br>
-                <form:button type="submit">Search</form:button>
-            </form:form>
+            <c:url value="/search" var="x"/>
+            <form:form action="${x}" method="post" modelAttribute="SearchForm">
+            <form:input path="bookcaseName" type="text" />  <br>
+            <form:errors path="bookcaseName" cssClass="error" /><br>
+            <form:input path="username" type="text"/><br>
+            <form:errors path="username" cssClass="error" /><br>
+            <form:input path="bookName" type="text"/><br>
+            <form:errors path="bookName" cssClass="error" /><br>
+            <form:button type="submit">Search</form:button>
+        </form:form>
             
             
         </p>
