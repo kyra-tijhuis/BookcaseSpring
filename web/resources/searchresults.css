@@ -32,16 +32,18 @@
 
 }
 
-#testlist {
+#bookcaselist {
     position: relative;
+    overflow-y: hidden;
+    left: 0%;
+    width: 60%;
     height: 50%;
-    margin-left: 0%;
-    overflow-y: scroll;
-
 }
 
-#testlist li {
-    margin-left: 10%;
+
+
+#bookcaselist li {
+
     margin-bottom: 10px;
     list-style-type: none;
 }
@@ -63,4 +65,17 @@
 }
 
 
+#buttonlist{
+    display: block;
+    float: left;
+    margin-left: 5%;
+    margin-top: 150px;
+}
 
+#buttonlist li {
+    list-style-type: none;
+}
+
+#buttonlist button {
+    width: 50px;
+}

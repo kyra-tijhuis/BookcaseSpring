@@ -13,8 +13,8 @@
 <head>
     <title>BookCase</title>
 
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type='text/javascript' src='resources/jquery.mousewheel.js'></script>
 
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/searchresults.css" />/>
@@ -37,36 +37,44 @@
             <form:button id="mainsearchbutton" type="submit">Search</form:button>
         </form:form>
 
-        <p id="mainparagraph">Zoekresultaten voor de term ${param.bookcaseName}<br>
+        <p id="mainparagraph">Zoekresultaten voor de term ${param.bookcaseName}
 
             <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
-        </p><br><br><br>
-        <ul id="testlist">
-            <li><table class="contenttable"><tr><td><img src="resources/bookcase.png"/></td><td><h5>Mooie boeken</h5><h6>user: Kyra</h6></td></tr></table></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
-            <li><img src="resources/bookcase.png"/></li>
+        </p><br>
+
+        <ul id="buttonlist">
+            <li></li>
+            <li><button id="buttonup">up</button></li>
+            <li><br><br><br></li>
+            <li><button id="buttondown">down</button></li>
         </ul>
+        <ul id="bookcaselist">
+            <li class="bookcaseli"><table class="contenttable"><tr><td><img src="resources/bookcase.png"/></td><td><h5>Mooie boeken</h5><h6>user: Kyra</h6></td></tr></table></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+            <li class="bookcaseli"><img src="resources/bookcase.png"/></li>
+        </ul>
+
 
 
 
@@ -75,6 +83,28 @@
 
         
     </article>
+
+    <script>
+        $(document).ready(function() {
+            $('#bookcaselist').on('mousewheel', function (e) {
+                var oEvent = e.originalEvent,
+                        delta = oEvent.deltaY;
+
+                if (delta < 0) {
+                    $('#bookcaselist').append($(".bookcaseli:first-of-type"));
+                } else if (delta > 0) {
+                    $('#bookcaselist').prepend($(".bookcaseli:last-of-type"));
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $('#buttonup').click(function() {$('#bookcaselist').append($(".bookcaseli:first-of-type"))});
+
+        $('#buttondown').click(function() {$('#bookcaselist').prepend($(".bookcaseli:last-of-type"))});
+    </script>
+
 
 
 </body>
