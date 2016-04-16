@@ -17,15 +17,10 @@
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/mainscreen.css" />/>
     <jsp:include page="LoginBar.jsp" />
 
-
 </head>
 <body>
     <article id="mainscreen">
-        <h1>Kyra en Jelle's wilde boekenkasten!</h1>
-        <form:form id="form" action="/search" method="get" modelAttribute="SearchForm">
-            <form:input path="bookcaseName" placeholder="find bookcase name..."/>
-            <form:button type="submit">Search</form:button>
-        </form:form>
+        <h1>Kyra and Jelle's wild bookcase mania!</h1>
 
         <p>
             <c:if test="${!empty user}">
@@ -37,11 +32,9 @@
             </c:if>
         </p>
 
-
-
-
-
     </article>
+
+
 
 </body>
 </html>

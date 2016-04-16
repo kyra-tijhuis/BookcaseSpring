@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BookcaseSpring.iml" filepath="$PROJECT_DIR$/BookcaseSpring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BC-spring.iml" filepath="$PROJECT_DIR$/BC-spring.iml" />
     </modules>
   </component>
 </project>

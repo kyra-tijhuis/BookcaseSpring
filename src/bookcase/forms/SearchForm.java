@@ -9,9 +9,7 @@ import javax.validation.constraints.Size;
  */
 
 public class SearchForm {
-    @Size(min=2)
     private String bookcaseName;
-
     private String username;
     private String bookName;
 

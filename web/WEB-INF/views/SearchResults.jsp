@@ -12,30 +12,70 @@
 <html>
 <head>
     <title>BookCase</title>
+
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+
+
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/searchresults.css" />/>
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
+
+
+
     <article id="mainscreen">
-        <p> Zoekresultaten voor de term ${param.query}
+        <h1>Search bookcases</h1>
+        <c:url value="/search" var="x"/>
+        <form:form id="mainsearch" action="${x}" method="post" modelAttribute="SearchForm">
+            <form:label class="searchlabel" path="bookcaseName">Bookcase:</form:label>
+            <form:input class="searchinput" path="bookcaseName" type="text" />
+            <form:label class="searchlabel" path="username">User:</form:label>
+            <form:input class="searchinput" path="username" type="text"/>
+            <form:label class="searchlabel" path="bookName">Book:</form:label>
+            <form:input class="searchinput" path="bookName" type="text"/>
+            <form:button id="mainsearchbutton" type="submit">Search</form:button>
+        </form:form>
+
+        <p id="mainparagraph">Zoekresultaten voor de term ${param.bookcaseName}<br>
 
             <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
-        </p>
-        <p>
-            <c:url value="/search" var="x"/>
-            <form:form action="${x}" method="post" modelAttribute="SearchForm">
-            <form:input path="bookcaseName" type="text" />  <br>
-            <form:errors path="bookcaseName" cssClass="error" /><br>
-            <form:input path="username" type="text"/><br>
-            <form:errors path="username" cssClass="error" /><br>
-            <form:input path="bookName" type="text"/><br>
-            <form:errors path="bookName" cssClass="error" /><br>
-            <form:button type="submit">Search</form:button>
-        </form:form>
-            
-            
-        </p>
+        </p><br><br><br>
+        <ul id="testlist">
+            <li><table class="contenttable"><tr><td><img src="resources/bookcase.png"/></td><td><h5>Mooie boeken</h5><h6>user: Kyra</h6></td></tr></table></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+            <li><img src="resources/bookcase.png"/></li>
+        </ul>
+
+
+
+
+
+
         
     </article>
+
+
 </body>
 </html>

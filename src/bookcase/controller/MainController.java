@@ -65,16 +65,8 @@ public class MainController {
 
 
     @RequestMapping(value="/search")
-    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query, BindingResult result) {
+    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
         prepareLoginBar(request, error);
-
-        if (result.hasErrors()) {
-            System.out.println("test");
-            return "SearchResults";
-        }
-
-        // show search results
-        System.out.println(query.getBookcaseName());
 
         return "SearchResults";
     }

@@ -1,0 +1,66 @@
+#mainsearch {
+    position: relative;
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 10px;
+    border: solid black;
+    background: lightcyan;
+}
+
+#mainsearchbutton {
+    display: inline;
+    margin-left: 2%;
+}
+
+#mainsearch .searchlabel {
+    display: inline;
+    margin-left: 2%
+}
+
+.searchinput {
+    display: inline;
+    width: 20%;
+    border: 1px black solid;
+}
+
+
+#mainparagraph {
+    display: inline-block;
+    width:50%;
+    margin-left: 4%;
+
+}
+
+#testlist {
+    position: relative;
+    height: 50%;
+    margin-left: 0%;
+    overflow-y: scroll;
+
+}
+
+#testlist li {
+    margin-left: 10%;
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.contenttable td {
+    vertical-align: top;
+    font-family: arial;
+    font-size: 20px;
+    margin-inside: 10%;
+}
+
+.contenttable h6 {
+    margin-bottom: 0px;
+    font-style: italic;
+}
+
+.contenttable h5 {
+    text-decoration: underline;
+}
+
+
+

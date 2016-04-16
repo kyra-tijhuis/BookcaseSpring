@@ -11,8 +11,9 @@
 </head>
 <body>
     <article id="mainscreen">
-        <p id="formholder">
-            <c:url value="/signup" var="reference"/>
+        <h1>Sign up!</h1>
+
+       <c:url value="/signup" var="reference"/>
 
             <form:form id="signupform" action="${reference}" method="post" modelAttribute="SignupForm">
 
@@ -27,7 +28,6 @@
                 <form:errors class="fielderror" path="password2" /><br>
                 <form:button id="signupbutton" type="submit">Sign Up!</form:button>
             </form:form>
-        </p>
 
     </article>
 </body>

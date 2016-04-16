@@ -14,8 +14,10 @@
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
+
     <article id="mainscreen">
-        <p> Dit is ${username}'s pagina
+        <h1>${username}'s page</h1>
+        <p>
             <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
         </p>
     </article>
