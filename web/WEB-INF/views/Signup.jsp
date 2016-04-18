@@ -15,20 +15,20 @@
 
        <c:url value="/signup" var="reference"/>
 
-            <form:form id="signupform" action="${reference}" method="post" modelAttribute="SignupForm">
+        <form:form id="signupform" action="${reference}" method="post" modelAttribute="SignupForm">
 
-                <form:label class="fieldlabel" path="username">Username:</form:label>
-                <form:input class="field" path="username" type="text" />
-                <form:errors class="fielderror" path="username" /><br>
-                <form:label class="fieldlabel" path="password">Password:</form:label>
-                <form:password class="field" path="password" />
-                <form:errors class="fielderror" path="password" /><br>
-                <form:label class="fieldlabel" path="password2">Confirm password:</form:label>
-                <form:password class="field" path="password2" />
-                <form:errors class="fielderror" path="password2" /><br>
-                <form:button id="signupbutton" type="submit">Sign Up!</form:button>
-            </form:form>
-
+            <form:label class="fieldlabel" path="username">Username:</form:label>
+            <form:input class="field" path="username" type="text" />
+            <form:errors class="fielderror" path="username" /><br>
+            <form:label class="fieldlabel" path="password">Password:</form:label>
+            <form:password class="field" path="password" />
+            <form:errors class="fielderror" path="password" /><br>
+            <form:label class="fieldlabel" path="password2">Confirm password:</form:label>
+            <form:password class="field" path="password2" />
+            <form:errors class="fielderror" path="password2" /><br>
+            <form:button id="signupbutton" type="submit">Sign Up!</form:button>
+        </form:form>
+        <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
     </article>
 </body>
 </html>

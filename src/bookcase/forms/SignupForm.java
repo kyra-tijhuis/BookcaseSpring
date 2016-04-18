@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 
 public class SignupForm {
-    @Size(min=4, max=20)
+    @Size(min=4, max=20, message="blaat")
     private String username;
     @Size(min=8, max=20)
     private String password;

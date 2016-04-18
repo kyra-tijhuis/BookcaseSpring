@@ -6,6 +6,7 @@
     padding: 10px;
     border: solid black;
     background: lightcyan;
+    font-family: Arial;
 }
 
 #mainsearchbutton {
@@ -27,55 +28,21 @@
 
 #mainparagraph {
     display: inline-block;
-    width:50%;
-    margin-left: 4%;
+    width:80%;
+    margin-left: 11%;
+    font-size: 25px;
+    font-family: Arial;
 
 }
-
-#bookcaselist {
-    position: relative;
-    overflow-y: hidden;
-    left: 0%;
-    width: 60%;
+.scrolllist {
+    width: 65%;
     height: 50%;
 }
 
-
-
-#bookcaselist li {
-
-    margin-bottom: 10px;
-    list-style-type: none;
-}
-
-.contenttable td {
-    vertical-align: top;
-    font-family: arial;
-    font-size: 20px;
-    margin-inside: 10%;
-}
-
-.contenttable h6 {
-    margin-bottom: 0px;
-    font-style: italic;
-}
-
-.contenttable h5 {
+.searchtable {
     text-decoration: underline;
+    padding-right: 10px;
 }
 
 
-#buttonlist{
-    display: block;
-    float: left;
-    margin-left: 5%;
-    margin-top: 150px;
-}
 
-#buttonlist li {
-    list-style-type: none;
-}
-
-#buttonlist button {
-    width: 50px;
-}
