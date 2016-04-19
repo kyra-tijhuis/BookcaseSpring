@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import bookcase.forms.SignupForm;
 import database.dao.UserDAO;
+import database.model.Bookcase;
 import database.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,7 @@ public class MainController {
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
 
-        prepareLoginBar(request, error);
+        ControllerFunctions.prepareLoginBar(request, error);
         return "MainScreen";
     }
 
@@ -39,21 +40,18 @@ public class MainController {
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(LoginForm login, HttpSession session, RedirectAttributes redirectAttributes){
+        UserDAO dao = new UserDAO();
 
-        if (login.getUsername().equals("Kyra") && login.getPassword().equals("Jelle")) {        // TODO uit database trekken
-            session.setAttribute("user", "Kyra");
-
-            return "redirect:" + login.getUrl();
-        } else {
-            if (login.getUsername().equals("Kyra")) {
-                redirectAttributes.addFlashAttribute("error", "password");
+        if (dao.getUser(login.getUsername()) != null) {
+            if (dao.correctPassword(login.getUsername(), login.getPassword())) {
+                session.setAttribute("user", login.getUsername());
             } else {
-                redirectAttributes.addFlashAttribute("error", "username");
+                redirectAttributes.addFlashAttribute("error", "password");
             }
-
-
-            return "redirect:" + login.getUrl();
+        } else {
+            redirectAttributes.addFlashAttribute("error", "username");
         }
+        return "redirect:" + login.getUrl();
     }
 
     @RequestMapping(value="/logout", method=RequestMethod.POST)
@@ -70,7 +68,7 @@ public class MainController {
 
     @RequestMapping(value="/search")
     public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
-        prepareLoginBar(request, error);
+        ControllerFunctions.prepareLoginBar(request, error);
 
         // ArrayList<Bookcase> bookcaselist = new ArrayList<>();
         // TODO: get list from database and name it bookcaselist;
@@ -81,13 +79,13 @@ public class MainController {
 
     @RequestMapping(value="/signup", method=RequestMethod.GET)
     public String signup(HttpServletRequest request, @ModelAttribute("error") String error) {
-        prepareLoginBar(request, error);
+        ControllerFunctions.prepareLoginBar(request, error);
         return "Signup";
     }
 
     @RequestMapping(value="/signup", method=RequestMethod.POST)
     public String signupPost(HttpServletRequest request, HttpSession session, @ModelAttribute("error") String error, @ModelAttribute("SignupForm") @Valid SignupForm userForm, BindingResult result) {
-        prepareLoginBar(request, error);
+        ControllerFunctions.prepareLoginBar(request, error);
 
         if (!(userForm.getPassword()).equals(userForm.getPassword2())) {
             result.addError(new FieldError("userForm", "password2", "Passwords do not match!"));
@@ -116,24 +114,27 @@ public class MainController {
 
 
 
-
-
-
     @RequestMapping("/user/*")
     public String user(HttpServletRequest request, @ModelAttribute("error") String error) {
+        ControllerFunctions.prepareLoginBar(request, error);
+
         String url = request.getRequestURL().toString();
-        request.setAttribute("username", url.substring(url.lastIndexOf("/")+1));
+        User activeUser = new UserDAO().getUser(url.substring(url.lastIndexOf("/")+1).toString());
+        request.setAttribute("userName", activeUser.getUserName());
+        if (activeUser != null) {
 
-        if (request.getAttribute("username").equals("Kyra")) {
+            ArrayList<Bookcase> bookcaselist = new ArrayList<>();
+            Bookcase testcase = new Bookcase();
+            testcase.setBookcaseName("Mooie Boeken");
+            testcase.setBookcaseID(123);
 
-            // ArrayList<Bookcase> bookcaselist = new ArrayList<>();
+            bookcaselist.add(testcase);
             // TODO: get list from database
-            // request.setAttribute("searchlist", bookcaselist);
+            request.setAttribute("searchlist", bookcaselist);
 
-            prepareLoginBar(request, error);
             return "User";
         } else {
-            prepareLoginBar(request, error);
+
             return "InvalidUser";
         }
 
@@ -160,18 +161,5 @@ public class MainController {
     }
 
     // preparation of loginbar by giving possible errors and the url of source page
-    public void prepareLoginBar(HttpServletRequest request, String error) {
-        request.setAttribute("address", request.getRequestURL());
-        if (error.equals("password")) {
-            request.setAttribute("pwPlaceholder", "Invalid Password!");
-            request.setAttribute("unPlaceholder", "username");
-        } else if (error.equals("username")) {
-            request.setAttribute("pwPlaceholder", "password");
-            request.setAttribute("unPlaceholder", "User does not exist!");
-        } else {
-            request.setAttribute("pwPlaceholder", "password");
-            request.setAttribute("unPlaceholder", "username");
-        }
 
-    }
 }

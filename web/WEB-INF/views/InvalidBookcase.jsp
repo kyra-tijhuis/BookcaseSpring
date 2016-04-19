@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Student
-  Date: 13-4-2016
-  Time: 12:16
+  Date: 19-4-2016
+  Time: 15:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,12 +14,11 @@
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
-    <article id="mainscreen">
-        <p> Deze user bestaat niet!
+<article id="mainscreen">
+    <p> Deze bookcase bestaat niet!
 
-        </p>
-
-        <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
-    </article>
+    </p>
+    <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
+</article>
 </body>
 </html>
