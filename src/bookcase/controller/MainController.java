@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 
 import bookcase.forms.SignupForm;
-import bookcase.model.Bookcase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -71,13 +70,10 @@ public class MainController {
     public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
         prepareLoginBar(request, error);
 
-        ArrayList<Bookcase> bookcaselist = new ArrayList<>();
-        // TODO: get list from database
-        for(int i=1; i <100; i++) {
-            bookcaselist.add(new Bookcase("Mooie Boeken " + i, 10));
-        }
+        // ArrayList<Bookcase> bookcaselist = new ArrayList<>();
+        // TODO: get list from database and name it bookcaselist;
 
-        request.setAttribute("searchlist", bookcaselist);
+        // request.setAttribute("searchlist", bookcaselist);
         return "SearchResults";
     }
 
@@ -118,13 +114,9 @@ public class MainController {
 
         if (request.getAttribute("username").equals("Kyra")) {
 
-            ArrayList<Bookcase> bookcaselist = new ArrayList<>();
+            // ArrayList<Bookcase> bookcaselist = new ArrayList<>();
             // TODO: get list from database
-            for(int i=1; i <100; i++) {
-                bookcaselist.add(new Bookcase("Mooie Boeken " + i, 10));
-            }
-
-            request.setAttribute("searchlist", bookcaselist);
+            // request.setAttribute("searchlist", bookcaselist);
 
             prepareLoginBar(request, error);
             return "User";

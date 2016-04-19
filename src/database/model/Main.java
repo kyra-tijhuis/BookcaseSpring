@@ -2,11 +2,12 @@ package database.model;
 
 import database.dao.UserDAO;
 
+import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
 
 public class Main {
 	// Zie de class Person voor toelichting van dit programma
@@ -64,7 +65,6 @@ public class Main {
     public static void main(String[] args) {
         UserDAO userDAO = new UserDAO();
         userDAO.createUser("User", "password");
-        userDAO.createUser("Kyra", "password");
         userDAO.getUser("User");
         userDAO.correctPassword("User","password");
     }
