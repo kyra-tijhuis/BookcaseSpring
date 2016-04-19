@@ -1,0 +1,38 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jackson-core-2.5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/commons-io-2.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/aopalliance-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/joda-time-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-validator-4.1.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jdom-2.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/validation-api-1.0.0.GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jcl-over-slf4j-1.7.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-web-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jackson-annotations-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/rome-utils-1.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-core-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jstl-api-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/aspectjrt-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/slf4j-api-1.7.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/commons-fileupload-1.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jackson-databind-2.5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-aop-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-expression-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.inject-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-security-core-4.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-webmvc-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/log4j-1.2.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jstl-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-beans-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-context-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/slf4j-log4j12-1.7.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-security-web-4.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jstl-impl-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/rome-1.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

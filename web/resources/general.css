@@ -1,0 +1,22 @@
+body {
+    background-color: white;
+}
+
+#mainscreen {
+    display: block;
+    background-color: lightgoldenrodyellow;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 500px;
+
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+#mainscreen p {
+    margin-left: 12px;
+}
