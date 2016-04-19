@@ -74,12 +74,6 @@ public class Book {
     }
 
 
-
-
-
-
-
-
     // getters
     public int getHeight() {
         return this.height;
@@ -98,9 +92,6 @@ public class Book {
     public void setOrientation(Orientation O) {
         this.orientation = O;
     }
-
-
-
 
 
 
