@@ -9,6 +9,8 @@ import javax.validation.Valid;
 
 
 import bookcase.forms.SignupForm;
+import database.dao.UserDAO;
+import database.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -91,6 +93,16 @@ public class MainController {
             result.addError(new FieldError("userForm", "password2", "Passwords do not match!"));
             return "Signup";
         }
+
+        if(!result.hasErrors()) {
+            UserDAO dao = new UserDAO();
+            User user = dao.createUser(userForm.getUsername(), userForm.getPassword());
+            if (user == null) {
+                result.addError(new FieldError("userForm", "username", "Username taken!"));
+            }
+        }
+
+
 
         if (result.hasErrors()) {
             return "Signup";
