@@ -3,11 +3,11 @@ body {
 }
 
 #mainscreen {
-    display: block;
+    display: inline-block;
     background-color: lightgoldenrodyellow;
     margin-left: 10%;
     margin-right: 10%;
-    height: 500px;
+    width: 80%;
 
     border-bottom: solid;
     border-left: solid;
@@ -17,6 +17,18 @@ body {
     padding-top: 10px;
 }
 
-#mainscreen p {
-    margin-left: 12px;
+#mainscreen h1 {
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-family: Arial;
 }
+
+#mainref {
+    float: right;
+    font-size: 15px;
+    font-family: Arial;
+    margin-right: 5%;
+}
+

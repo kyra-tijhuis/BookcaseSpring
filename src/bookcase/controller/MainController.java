@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 
 import bookcase.forms.SignupForm;
+import bookcase.model.Bookcase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 
 @Controller
@@ -65,17 +68,16 @@ public class MainController {
 
 
     @RequestMapping(value="/search")
-    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query, BindingResult result) {
+    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
         prepareLoginBar(request, error);
 
-        if (result.hasErrors()) {
-            System.out.println("test");
-            return "SearchResults";
+        ArrayList<Bookcase> bookcaselist = new ArrayList<>();
+        // TODO: get list from database
+        for(int i=1; i <100; i++) {
+            bookcaselist.add(new Bookcase("Mooie Boeken " + i, 10));
         }
 
-        // show search results
-        System.out.println(query.getBookcaseName());
-
+        request.setAttribute("searchlist", bookcaselist);
         return "SearchResults";
     }
 
@@ -113,7 +115,17 @@ public class MainController {
     public String user(HttpServletRequest request, @ModelAttribute("error") String error) {
         String url = request.getRequestURL().toString();
         request.setAttribute("username", url.substring(url.lastIndexOf("/")+1));
+
         if (request.getAttribute("username").equals("Kyra")) {
+
+            ArrayList<Bookcase> bookcaselist = new ArrayList<>();
+            // TODO: get list from database
+            for(int i=1; i <100; i++) {
+                bookcaselist.add(new Bookcase("Mooie Boeken " + i, 10));
+            }
+
+            request.setAttribute("searchlist", bookcaselist);
+
             prepareLoginBar(request, error);
             return "User";
         } else {

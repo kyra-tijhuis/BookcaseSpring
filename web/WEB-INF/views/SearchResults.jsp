@@ -12,30 +12,60 @@
 <html>
 <head>
     <title>BookCase</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type='text/javascript' src='resources/jquery.mousewheel.js'></script>
+    <script type='text/javascript' src='resources/scrolllist.js'></script>
+
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/searchresults.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/scrolllist.css" />/>
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
-    <article id="mainscreen">
-        <p> Zoekresultaten voor de term ${param.query}
 
-            <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
-        </p>
-        <p>
-            <c:url value="/search" var="x"/>
-            <form:form action="${x}" method="post" modelAttribute="SearchForm">
-            <form:input path="bookcaseName" type="text" />  <br>
-            <form:errors path="bookcaseName" cssClass="error" /><br>
-            <form:input path="username" type="text"/><br>
-            <form:errors path="username" cssClass="error" /><br>
-            <form:input path="bookName" type="text"/><br>
-            <form:errors path="bookName" cssClass="error" /><br>
-            <form:button type="submit">Search</form:button>
+
+
+    <article id="mainscreen">
+        <h1>Search bookcases</h1>
+        <c:url value="/search" var="x"/>
+        <form:form id="mainsearch" action="${x}" method="post" modelAttribute="SearchForm">
+            <form:label class="searchlabel" path="bookcaseName">Bookcase:</form:label>
+            <form:input class="searchinput" path="bookcaseName" type="text" />
+            <form:label class="searchlabel" path="username">User:</form:label>
+            <form:input class="searchinput" path="username" type="text"/>
+            <form:label class="searchlabel" path="bookName">Book:</form:label>
+            <form:input class="searchinput" path="bookName" type="text"/>
+            <form:button id="mainsearchbutton" type="submit">Search</form:button>
         </form:form>
-            
-            
-        </p>
-        
+
+        <p id="mainparagraph">
+            <strong>Search results for:</strong><br><br>
+            <table>
+                <tr><td class="searchtable">Bookcase name:</td><td>${param.bookcaseName}</td></tr>
+                <tr><td class="searchtable">User name:</td><td>${param.username}</td></tr>
+                <tr><td class="searchtable">Book name:</td><td>${param.bookName}</td></tr>
+            </table>
+
+        </p><br>
+
+        <ul id="buttonlist">
+            <li><img class="buttonup" src="resources/arrow.png"/></li>
+            <li><br><br><br></li>
+            <li><img class="buttondown" src="resources/arrow.png"/></li>
+        </ul>
+        <ul class="scrolllist">
+            <c:forEach var="item" items="${searchlist}">
+                <li class="scrollitem"><table class="contenttable"><tr><td><img src="resources/bookcase.png"/></td><td><h5>${item.getName()}</h5><h6>user: Kyra</h6></td></tr></table></li>
+            </c:forEach>
+        </ul>
+        <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
+        <script>
+            $(document).ready(
+                    makelist
+            );
+        </script>
+
     </article>
 </body>
 </html>

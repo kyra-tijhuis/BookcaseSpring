@@ -10,14 +10,39 @@
 <html>
 <head>
     <title>BookCase</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type='text/javascript' src='../resources/jquery.mousewheel.js'></script>
+    <script type='text/javascript' src='../resources/scrolllist.js'></script>
+
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/scrolllist.css" />/>
+    <link rel="stylesheet" type="text/css" href=<c:url value="/resources/user.css" />/>
+
     <jsp:include page="LoginBar.jsp" />
 </head>
 <body>
+
     <article id="mainscreen">
-        <p> Dit is ${username}'s pagina
-            <a href="<c:url value="/index"/>">Terug naar hoofdpagina</a>
-        </p>
+        <h1>${username}'s page</h1>
+
+
+        <ul id="buttonlist">
+            <li><img class="buttonup" src="../resources/arrow.png"/></li>
+            <li><br><br><br></li>
+            <li><img class="buttondown" src="../resources/arrow.png"/></li>
+        </ul>
+        <ul class="scrolllist">
+            <c:forEach var="item" items="${searchlist}">
+                <li class="scrollitem"><table class="contenttable"><tr><td><img src="../resources/bookcase.png"/></td><td><h5>${item.getName()}</h5><h6>user: Kyra</h6></td></tr></table></li>
+            </c:forEach>
+        </ul>
+        <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
+
+        <script>
+            $(document).ready(
+                    makelist
+            );
+        </script>
     </article>
 </body>
 </html>

@@ -16,6 +16,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/bar.css"/>
 </head>
+
 <body>
     <article id="header">
         <c:if test="${empty user}">
@@ -39,6 +40,11 @@
                 <button type="submit", name="url", value="${address}">Logout</button>
             </form:form>
         </c:if>
+
+        <form:form class="form" id="searchform" action="/search" method="get" modelAttribute="SearchForm">
+            <form:button id="searchbutton" type="submit">Search</form:button>
+            <form:input id="searchinput" path="bookcaseName" placeholder="find bookcase name..."/>
+        </form:form>
     </article>
 </body>
 </html>
