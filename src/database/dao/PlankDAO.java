@@ -14,15 +14,7 @@ public class PlankDAO {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
     public Plank getPlank(int plankID) {
-        Plank plank = null;
-        Query query = emf.createEntityManager().createQuery("from Plank p where plankID=:plankid");
-        query.setParameter("plankid", plankID);
-        try {
-            plank = (Plank) query.getSingleResult();
-        } catch (NoResultException e) {
-            // plank is not present in database and stays null
-        }
-        return plank;
+        return emf.createEntityManager().find(Plank.class, plankID);
     }
 
     public Plank createPlank() {
