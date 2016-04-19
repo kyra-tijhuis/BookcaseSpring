@@ -1,0 +1,33 @@
+#bookcase {
+    width: 60%;
+    height: 95%;
+    margin-left: 20%;
+
+}
+
+#bookcaseleft {
+    height: 100%;
+    width: 3%;
+    background-color: saddlebrown;
+    float: left;
+}
+#bookcaseright {
+    height: 100%;
+    width: 3%;
+    background-color: saddlebrown;
+    float: right;
+}
+
+#bookcasetop {
+    height: 3%;
+    width: 100%;
+    background-color: saddlebrown;
+    float: right;
+}
+
+
+
+
+#mainscreen {
+    height: 95%
+}
