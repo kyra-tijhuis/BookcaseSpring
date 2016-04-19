@@ -6,10 +6,7 @@
         <element id="directory" name="classes">
           <element id="module-output" name="BC-spring" />
         </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="lib" />
-          <element id="library" level="project" name="lib1" />
-        </element>
+        <element id="directory" name="lib" />
       </element>
       <element id="javaee-facet-resources" facet="BC-spring/web/Web2" />
       <element id="javaee-facet-resources" facet="BC-spring/web/Web" />
