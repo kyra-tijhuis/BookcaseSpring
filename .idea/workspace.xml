@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="296115bf-5b72-44b3-8a94-ea0c17c55412" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookcase/controller/MainController.java" afterPath="$PROJECT_DIR$/src/bookcase/controller/MainController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bookcase/forms/SignupForm.java" afterPath="$PROJECT_DIR$/src/bookcase/forms/SignupForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/SearchResults.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/SearchResults.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/Signup.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/Signup.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/User.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/User.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/resources/general.css" afterPath="$PROJECT_DIR$/web/resources/general.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/resources/searchresults.css" afterPath="$PROJECT_DIR$/web/resources/searchresults.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/resources/signup.css" afterPath="$PROJECT_DIR$/web/resources/signup.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/resources/bar.css" afterPath="$PROJECT_DIR$/web/resources/bar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/resources/scrolllist.css" afterPath="$PROJECT_DIR$/web/resources/scrolllist.css" />
     </list>
     <ignored path="BC-spring.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Signup.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Signup.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/Signup.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="21" column="59" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="59" />
+            <state relative-caret-position="561">
+              <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -53,20 +49,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/User.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SearchResults.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/SearchResults.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
+            <state relative-caret-position="850">
               <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding />
             </state>
@@ -96,8 +82,28 @@
       <file leaf-file-name="scrolllist.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/resources/scrolllist.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-252">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="394">
+              <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginBar.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bar.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/resources/bar.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -106,7 +112,7 @@
       <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookcase/controller/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
+            <state relative-caret-position="952">
               <caret line="94" column="93" selection-start-line="94" selection-start-column="68" selection-end-line="94" selection-end-column="93" />
               <folding>
                 <element signature="method#login#0;class#MainController#0" expanded="false" />
@@ -122,21 +128,9 @@
       <file leaf-file-name="SignupForm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/bookcase/forms/SignupForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="39" />
+            <state relative-caret-position="289">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bookcase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bookcase/model/Bookcase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding>
-                <element signature="method#setWidth#0;class#Bookcase#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -167,11 +161,8 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/views/TopBar.jsp" />
         <option value="$PROJECT_DIR$/src/bookcase/forms/SearchForm.java" />
         <option value="$PROJECT_DIR$/web/resources/mainscreen.css" />
-        <option value="$PROJECT_DIR$/web/resources/bar.css" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/MainScreen.jsp" />
         <option value="$PROJECT_DIR$/web/resources/scrolllist.js" />
-        <option value="$PROJECT_DIR$/web/resources/scrolllist.css" />
         <option value="$PROJECT_DIR$/web/resources/general.css" />
         <option value="$PROJECT_DIR$/web/resources/signup.css" />
         <option value="$PROJECT_DIR$/src/bookcase/controller/MainController.java" />
@@ -180,7 +171,10 @@
         <option value="$PROJECT_DIR$/web/resources/searchresults.css" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/SearchResults.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/views/Signup.jsp" />
+        <option value="$PROJECT_DIR$/web/resources/scrolllist.css" />
         <option value="$PROJECT_DIR$/src/bookcase/forms/SignupForm.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp" />
+        <option value="$PROJECT_DIR$/web/resources/bar.css" />
       </list>
     </option>
   </component>
@@ -227,6 +221,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
@@ -368,58 +363,9 @@
               <option name="myItemId" value="bookcase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookcaseSpring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookcaseSpring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bookcase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookcaseSpring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BookcaseSpring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bookcase" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -996,12 +942,14 @@
       <workItem from="1460843464336" duration="5189000" />
       <workItem from="1460961767796" duration="3169000" />
       <workItem from="1460964960780" duration="1480000" />
-      <workItem from="1460969280236" duration="12984000" />
+      <workItem from="1460969280236" duration="12986000" />
+      <workItem from="1461049473214" duration="1277000" />
+      <workItem from="1461061235647" duration="147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50444000" />
+    <option name="totallyTimeSpent" value="51870000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1073,7 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1081,7 +1028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1121,7 +1067,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1129,7 +1074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
           <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,7 +1113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1177,7 +1120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1225,7 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1285,27 +1226,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/resources/listscroller.js" />
     <entry file="file://$PROJECT_DIR$/web/resources/jquery.scrollbox.js" />
-    <entry file="file://$PROJECT_DIR$/web/resources/bar.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/resources/mainscreen.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1313,9 +1237,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1836">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1331,7 +1252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1339,15 +1259,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/resources/scrolllist.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1387,7 +1298,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bookcase/controller/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
+        <state relative-caret-position="952">
           <caret line="94" column="93" selection-start-line="94" selection-start-column="68" selection-end-line="94" selection-end-column="93" />
           <folding>
             <element signature="method#login#0;class#MainController#0" expanded="false" />
@@ -1407,17 +1318,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bookcase/forms/SignupForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/SearchResults.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
+        <state relative-caret-position="850">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
@@ -1433,8 +1336,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/Signup.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="59" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="59" />
+        <state relative-caret-position="561">
+          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bookcase/forms/SignupForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/resources/scrolllist.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/views/LoginBar.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/resources/bar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
           <folding />
         </state>
       </provider>

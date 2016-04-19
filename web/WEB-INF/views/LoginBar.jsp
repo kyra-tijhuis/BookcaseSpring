@@ -16,6 +16,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/bar.css"/>
 </head>
+
 <body>
     <article id="header">
         <c:if test="${empty user}">

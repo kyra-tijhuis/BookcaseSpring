@@ -44,9 +44,9 @@
 
 .buttondown {
     transform: rotate(180deg);
-    height: 80px;
+    height: 40px;
 }
 
 .buttonup {
-    height: 80px;
+    height: 40px;
 }
