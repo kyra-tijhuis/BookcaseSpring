@@ -1,33 +1,101 @@
+body {
+    min-width: 1400px;
+    overflow: scroll;
+}
+
 #bookcase {
     width: 60%;
-    height: 95%;
+    height: 1000px;
     margin-left: 20%;
-
+    background-color: floralwhite;
 }
+
 
 #bookcaseleft {
     height: 100%;
-    width: 3%;
-    background-color: saddlebrown;
+    width: 4%;
+    background-image: url("/resources/cedar-wood.jpg");
+    background-size: cover;
     float: left;
 }
+
 #bookcaseright {
     height: 100%;
-    width: 3%;
-    background-color: saddlebrown;
+    width: 4%;
+    background-image: url("/resources/cedar-wood.jpg");
+    background-size: cover;
     float: right;
 }
 
-#bookcasetop {
-    height: 3%;
+#bookcase {
+    height: 95%;
+    width: 50%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#bookcase td {
+    margin: 0;
+    padding: 0;
+}
+
+#planks {
     width: 100%;
-    background-color: saddlebrown;
-    float: right;
+    height: 100%;
+    padding-left: 0px;
+}
+
+#plankcell {
+    height: 100%;
+    overflow: hidden;
+}
+
+#planks li {
+    list-style-type: none;
+}
+
+#topplank {
+    background-image: url("/resources/cedar-wood.jpg");
+    background-size: cover;
+    height: 15px;
 }
 
 
 
-
-#mainscreen {
-    height: 95%
+.plank {
+    background-image: url("/resources/cedar-wood.jpg");
+    background-size: cover;
+    height: 15px;
 }
+
+.books {
+    height: 100px;
+}
+
+.booklist {
+    width: 100%;
+    height: 100%;
+    padding-left: 0;
+    display: flex;
+
+}
+
+.booklist li {
+    list-style-type: none;
+    display: inline-block;
+    height: 100%;
+}
+
+.book {
+    height: 100%;
+    border: 1px solid black;
+    align-items: flex-end;
+}
+
+.book img {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    top: 50px;
+}
+
