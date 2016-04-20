@@ -2,6 +2,7 @@ package bookcase.controller;
 
 import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
+import database.dao.BookcaseDAO;
 import database.model.Book;
 import database.model.BookDetails;
 import database.model.Bookcase;
@@ -24,40 +25,28 @@ public class BookcaseController {
     @RequestMapping(value="/bookcase")
     public String bookcases (HttpServletRequest request, @ModelAttribute("error") String error, Model model) {
         ControllerFunctions.prepareLoginBar(request, error);
-        if (true) { // TODO check if bookcase exists in DB and import it
+        try {
+            int ID = Integer.parseInt(request.getParameter("id"));
+            Bookcase b = new BookcaseDAO().getBookcase(ID);
+            if (b!=null) { // TODO check if bookcase exists in DB and import it
 
-            // temp
-            Bookcase b = new Bookcase();
-            Plank p = new Plank();
-            BookDetails book = new BookDetails();
-            book.setBook(new Book());
-            book.getBook().setWidth(100);
-            book.getBook().setHeight(70);
-            ArrayList<BookDetails> listbook = new ArrayList<BookDetails>();
-            listbook.add(book);
-            listbook.add(book);
-            p.setBooks(listbook);
-            p.setHeight(200);
-            ArrayList<Plank> listplank = new ArrayList<>();
-            listplank.add(p);
-            listplank.add(p);
+                int height = -10;
+                for (Plank plank: b.getPlanks()) {
+                    height += 15 + plank.getHeight();
+                }
 
-            b.setWidth(500);
-            b.setPlanks(listplank);
-            b.setBookcaseName("Mooie Boeken");
 
-            int height = -10;
-            for (Plank plank: b.getPlanks()) {
-                height += 15 + plank.getHeight();
+
+                
+                model.addAttribute("bookcaseheight", height);
+                model.addAttribute("bookcase", b);
+
+
+                return "Bookcase";
+            } else {
+                return "InvalidBookcase";
             }
-
-            model.addAttribute("bookcaseheight", height);
-            model.addAttribute("bookcase", b);
-            // end temp
-
-
-            return "Bookcase";
-        } else {
+        } catch (NumberFormatException e) {
             return "InvalidBookcase";
         }
     }

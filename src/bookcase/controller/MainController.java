@@ -122,15 +122,7 @@ public class MainController {
         User activeUser = new UserDAO().getUser(url.substring(url.lastIndexOf("/")+1).toString());
         request.setAttribute("userName", activeUser.getUserName());
         if (activeUser != null) {
-
-            ArrayList<Bookcase> bookcaselist = new ArrayList<>();
-            Bookcase testcase = new Bookcase();
-            testcase.setBookcaseName("Mooie Boeken");
-            testcase.setBookcaseID(123);
-
-            bookcaselist.add(testcase);
-            // TODO: get list from database
-            request.setAttribute("searchlist", bookcaselist);
+            request.setAttribute("searchlist", activeUser.getBookcases());
 
             return "User";
         } else {

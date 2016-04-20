@@ -32,6 +32,7 @@ public class BookDAO {
     public Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness) {
         Book result = getBook(isbn);
         if (result==null) {
+            result = new Book();
             // new book
             result.setIsbn(isbn);
             result.setBookTitle(bookTitle);

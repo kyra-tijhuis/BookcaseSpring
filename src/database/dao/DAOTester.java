@@ -8,18 +8,18 @@ import database.model.*;
 public class DAOTester {
       private void userTest() {
         UserDAO obj = new UserDAO();
-        String userName = "Rudolf";
-        obj.createUser(userName, "passwordpasswordpassword");
+        String userName = "Alice";
+        obj.createUser(userName, "password");
         User user = obj.getUser(userName);
         if (user!=null) {
-            System.out.println(obj.correctPassword(userName, "passwordpasswordpassword"));
+            System.out.println(obj.correctPassword(userName, "password"));
         } else {
             System.out.println("no user");
         }
     }
 
     private void bookTest() {
-
+        new BookDAO().createBook("1234567890124", "Title", "Author", 250, 150, 20);
     }
 
     private void putBookInBookcase() {
@@ -27,11 +27,11 @@ public class DAOTester {
         BookcaseDAO bookcaseDAO = new BookcaseDAO();
         PlankDAO plankDAO = new PlankDAO();
         Book book = new BookDAO().getBook("1234567890124");
-        User user = userDAO.getUser("Bob");
-        Bookcase bookcase = bookcaseDAO.createBookcase("Kyra's tweede kast", 1000);
+        User user = userDAO.getUser("Alice");
+        Bookcase bookcase = bookcaseDAO.createBookcase("Boekenkast", 800);
         user.getBookcases().add(bookcase);
         userDAO.updateUser(user);
-        Plank plank = plankDAO.createPlank(270);
+        Plank plank = plankDAO.createPlank(300);
         bookcase.getPlanks().add(plank);
         bookcaseDAO.updateBookcase(bookcase);
         int index = plankDAO.firstEmptyOnPlank(plank.getPlankID());
@@ -46,7 +46,7 @@ public class DAOTester {
     public static void main(String[] args) {
         DAOTester obj = new DAOTester();
         obj.userTest();
-//        obj.bookTest();
+        obj.bookTest();
         obj.putBookInBookcase();
         System.exit(0);
     }
