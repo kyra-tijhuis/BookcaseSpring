@@ -8,7 +8,7 @@ import database.model.*;
 public class DAOTester {
       private void userTest() {
         UserDAO obj = new UserDAO();
-        String userName = "Bob";
+        String userName = "Rudolf";
         obj.createUser(userName, "passwordpasswordpassword");
         User user = obj.getUser(userName);
         if (user!=null) {

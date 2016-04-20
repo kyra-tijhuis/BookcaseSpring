@@ -23,7 +23,7 @@
 <body>
 
     <article id="mainscreen">
-        <h1>${username}'s page</h1>
+        <h1>${userName}'s page</h1>
 
 
         <ul id="buttonlist">
@@ -33,7 +33,8 @@
         </ul>
         <ul class="scrolllist">
             <c:forEach var="item" items="${searchlist}">
-                <li class="scrollitem"><table class="contenttable"><tr><td><img src="../resources/bookcase.png"/></td><td><h5>${item.getName()}</h5><h6>user: Kyra</h6></td></tr></table></li>
+                <c:url value="/bookcase?id=${item.getBookcaseID()}" var="x"/>
+                <li class="scrollitem"><a href="${x}"><table class="contenttable"><tr><td><img src="../resources/bookcase.png"/></td><td><h5>${item.getBookcaseName()}</h5><h6>user: Kyra</h6></td></tr></table></a></li>
             </c:forEach>
         </ul>
         <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
