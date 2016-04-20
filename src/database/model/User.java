@@ -58,6 +58,10 @@ public class User {
         return bookcases;
     }
 
+    /**
+     * @deprecated Use getBookcases().add(Bookcase bookcase)
+     * @param bookcases
+     */
     public void setBookcases(Collection<Bookcase> bookcases) {
         this.bookcases = bookcases;
     }

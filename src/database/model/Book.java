@@ -17,7 +17,6 @@ public class Book {
     private int height;
     private int width;
     private int thickness;
-    private File cover;
 
     @Id
     public String getIsbn() {
@@ -66,14 +65,6 @@ public class Book {
 
     public void setThickness(int thickness) {
         this.thickness = thickness;
-    }
-
-    public File getCover() {
-        return cover;
-    }
-
-    public void setCover(File cover) {
-        this.cover = cover;
     }
 
     @Override

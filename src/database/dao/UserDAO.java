@@ -1,5 +1,6 @@
 package database.dao;
 
+import database.model.Bookcase;
 import database.model.User;
 
 import javax.persistence.*;
@@ -26,6 +27,12 @@ public class UserDAO {
         return user;
     }
 
+    /**
+     * Create a user if the username does not exist, otherwise return null.
+     * @param userName the user's username
+     * @param password the user's password
+     * @return the newly created user, or null if the user already existed.
+     */
     public User createUser(String userName, String password) {
         User existingUser = getUser(userName);
 
@@ -46,6 +53,24 @@ public class UserDAO {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Update the User parameter before calling this method!
+     * @param user the updated User object
+     * @return updated user
+     */
+    public User updateUser(User user) {
+        User result = null;
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction t = em.getTransaction();
+        t.begin();
+
+        result = em.merge(user);
+
+        t.commit();
+        em.close();
+        return result;
     }
 
     private String generateSalt() {

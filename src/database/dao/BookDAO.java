@@ -18,7 +18,18 @@ public class BookDAO {
         return emf.createEntityManager().find(Book.class, isbn);
     }
 
-    public Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness, File cover) {
+    /**
+     * Creates a new book in the database with the supplied data and returns that book.
+     * If the isbn is already present in the database that book is returned.
+     * @param isbn
+     * @param bookTitle
+     * @param author
+     * @param height in mm
+     * @param width in mm
+     * @param thickness in mm
+     * @return a Book, newly created or retrieved from the database.
+     */
+    public Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness) {
         Book result = getBook(isbn);
         if (result==null) {
             // new book
@@ -28,7 +39,6 @@ public class BookDAO {
             result.setHeight(height);
             result.setWidth(width);
             result.setThickness(thickness);
-            result.setCover(cover);
 
             EntityManager em = emf.createEntityManager();
             EntityTransaction t = em.getTransaction();
@@ -40,4 +50,21 @@ public class BookDAO {
         return result;
     }
 
+    /**
+     * Update the Book parameter before calling this method!
+     * @param book the updated Book object
+     * @return updated book
+     */
+    public Book updateBook(Book book) {
+        Book result = null;
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction t = em.getTransaction();
+        t.begin();
+
+        result = em.merge(book);
+
+        t.commit();
+        em.close();
+        return result;
+    }
 }

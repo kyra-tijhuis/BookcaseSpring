@@ -55,7 +55,6 @@ public class BookDetails {
     }
 
     @ManyToOne(targetEntity = Plank.class,cascade = {CascadeType.ALL})
-    @JoinColumn(name = "plankID")
     public Plank getPlank() {
         return plank;
     }

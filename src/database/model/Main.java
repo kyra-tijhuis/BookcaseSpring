@@ -27,7 +27,6 @@ public class Main {
         book.setWidth(150);
         book.setHeight(200);
         book.setThickness(20);
-        book.setCover(null);
 
         BookDetails details = new BookDetails();
         details.setBook(book);
