@@ -32,17 +32,26 @@ public class BookcaseController {
             BookDetails book = new BookDetails();
             book.setBook(new Book());
             book.getBook().setWidth(100);
+            book.getBook().setHeight(70);
             ArrayList<BookDetails> listbook = new ArrayList<BookDetails>();
             listbook.add(book);
             listbook.add(book);
             p.setBooks(listbook);
+            p.setHeight(200);
             ArrayList<Plank> listplank = new ArrayList<>();
             listplank.add(p);
             listplank.add(p);
 
+            b.setWidth(500);
             b.setPlanks(listplank);
             b.setBookcaseName("Mooie Boeken");
 
+            int height = -10;
+            for (Plank plank: b.getPlanks()) {
+                height += 15 + plank.getHeight();
+            }
+
+            model.addAttribute("bookcaseheight", height);
             model.addAttribute("bookcase", b);
             // end temp
 

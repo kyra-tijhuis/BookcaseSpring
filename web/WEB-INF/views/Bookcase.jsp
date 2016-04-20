@@ -20,14 +20,15 @@
 
 <article id="mainscreen">
     ${bookcase.bookcaseName}
-    <table id="bookcase"><tr><td id="bookcaseleft"></td>
+
+    <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
         <td id="plankcell"><ul id="planks">
             <li id="topplank"></li>
             <c:forEach var="plank" items="${bookcase.planks}">
-            <li class="books">
+            <li class="books" style="height: ${plank.height}">
                 <ul class="booklist">
                     <c:forEach var="book" items="${plank.books}">
-                        <li class="book" style="width: ${book.book.width}"><img src="http://d.gr-assets.com/books/1387708305l/6300.jpg"/></li>
+                        <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="http://d.gr-assets.com/books/1387708305l/6300.jpg"/></li>
                     </c:forEach>
                 </ul>
             </li>
@@ -35,7 +36,6 @@
             </c:forEach>
         </ul></td>
     <td id="bookcaseright"></td></tr></table>
-
 
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
 </article>

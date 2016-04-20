@@ -10,9 +10,9 @@ import javax.validation.constraints.Size;
 public class SignupForm {
     @Size(min=4, max=50, message="Name size must be between 4-20 characters")
     private String username;
-    @Size(min=8, max=20, message="Password size must be between 4-20 characters")
+    @Size(min=8, max=20, message="Password size must be between 8-20 characters")
     private String password;
-    @Size(min=8, max=20, message="Password size must be between 4-20 characters")
+    @Size(min=8, max=20, message="Password size must be between 8-20 characters")
     private String password2;
 
 
