@@ -120,8 +120,9 @@ public class MainController {
 
         String url = request.getRequestURL().toString();
         User activeUser = new UserDAO().getUser(url.substring(url.lastIndexOf("/")+1).toString());
-        request.setAttribute("userName", activeUser.getUserName());
+
         if (activeUser != null) {
+            request.setAttribute("userName", activeUser.getUserName());
             request.setAttribute("searchlist", activeUser.getBookcases());
 
             return "User";

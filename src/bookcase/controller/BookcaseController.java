@@ -37,7 +37,7 @@ public class BookcaseController {
 
 
 
-                
+
                 model.addAttribute("bookcaseheight", height);
                 model.addAttribute("bookcase", b);
 
