@@ -8,9 +8,13 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
+import bookcase.forms.AddCaseForm;
 import bookcase.forms.SignupForm;
+import database.dao.BookcaseDAO;
+import database.dao.PlankDAO;
 import database.dao.UserDAO;
 import database.model.Bookcase;
+import database.model.Plank;
 import database.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +27,7 @@ import bookcase.forms.SearchForm;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -65,18 +70,6 @@ public class MainController {
         return "redirect:/index";
     }
 
-
-    @RequestMapping(value="/search")
-    public String searchGet(HttpServletRequest request, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
-        ControllerFunctions.prepareLoginBar(request, error);
-
-        // ArrayList<Bookcase> bookcaselist = new ArrayList<>();
-        // TODO: get list from database and name it bookcaselist;
-
-        // request.setAttribute("searchlist", bookcaselist);
-        return "SearchResults";
-    }
-
     @RequestMapping(value="/signup", method=RequestMethod.GET)
     public String signup(HttpServletRequest request, @ModelAttribute("error") String error) {
         ControllerFunctions.prepareLoginBar(request, error);
@@ -114,12 +107,32 @@ public class MainController {
 
 
 
+
+
+    @RequestMapping(value="/search")
+    public String searchGet(HttpServletRequest request, Model model, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
+        ControllerFunctions.prepareLoginBar(request, error);
+        BookcaseDAO bookcaseDAO = new BookcaseDAO();
+        List<Bookcase> bookcaseList = bookcaseDAO.getAllBookcases();
+
+        model.addAttribute("searchlist", bookcaseList);
+        model.addAttribute("bookcaseDAO", bookcaseDAO);
+
+        return "SearchResults";
+    }
+
+
     @RequestMapping("/user/*")
-    public String user(HttpServletRequest request, @ModelAttribute("error") String error) {
+    public String user(HttpServletRequest request, Model model, @ModelAttribute("error") String error, @ModelAttribute("AddCaseForm") @Valid AddCaseForm addCaseForm, BindingResult result) {
         ControllerFunctions.prepareLoginBar(request, error);
 
         String url = request.getRequestURL().toString();
         User activeUser = new UserDAO().getUser(url.substring(url.lastIndexOf("/")+1).toString());
+
+        if (result.hasErrors()) {
+            System.out.println(result.getFieldError("name"));
+        }
+
 
         if (activeUser != null) {
             request.setAttribute("userName", activeUser.getUserName());
@@ -132,6 +145,41 @@ public class MainController {
         }
 
     }
+
+    @RequestMapping(value="/addcase", method=RequestMethod.POST)
+    public String addbookcase(@Valid AddCaseForm inputform, BindingResult result, HttpSession session) {
+        if (inputform.getUser().equals(session.getAttribute("user"))) {
+            UserDAO userDAO = new UserDAO();
+            User user = userDAO.getUser(inputform.getUser());
+            if (user != null) {
+                for (Bookcase b :  user.getBookcases()) {
+                    if (b.getBookcaseName().equals(inputform.getName())) {
+                        result.addError(new FieldError("AddCaseForm", "name", "Bookcase already exists"));
+                    }
+                }
+                if (!result.hasErrors()) {
+                    BookcaseDAO bookcaseDAO = new BookcaseDAO();
+                    Bookcase bookcase = bookcaseDAO.createBookcase(inputform.getName(), 1000);
+                    user.getBookcases().add(bookcase);
+                    userDAO.updateUser(user);
+                    PlankDAO plankDAO = new PlankDAO();
+                    Plank plank = plankDAO.createPlank(300);
+                    bookcase.getPlanks().add(plank);
+                    bookcaseDAO.updateBookcase(bookcase);
+                }
+            }
+        }
+        return "redirect:/user/" + inputform.getUser();
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -153,6 +201,10 @@ public class MainController {
         return new SignupForm();
     }
 
+    @ModelAttribute("AddCaseForm")
+    public AddCaseForm createAddCaseForm() {
+        return new AddCaseForm();
+    }
     // preparation of loginbar by giving possible errors and the url of source page
 
 }

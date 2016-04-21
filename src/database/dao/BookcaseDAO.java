@@ -7,6 +7,7 @@ import database.model.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kyra on 19/04/2016.
@@ -58,10 +59,13 @@ public class BookcaseDAO {
         query.setParameter("bc", bookcase);
         try {
             user = (User) query.getSingleResult();
-            System.out.println(user.getUserID());
         } catch (NoResultException e) {
             System.out.println("No result");
         }
         return user;
+    }
+
+    public List<Bookcase> getAllBookcases() {
+        return emf.createEntityManager().createQuery("from Bookcase").getResultList();
     }
 }
