@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>BookCase</title>
@@ -25,6 +26,15 @@
     <article id="mainscreen">
         <h1>${userName}'s page</h1>
 
+        <c:url value="/addcase" var="url"/>
+        <c:if test="${user == userName}">
+            <form:form id="addcase" action="${url}" method="post" modelAttribute="AddCaseForm">
+                <form:input id="casenameinput" path="name" placeholder="Nonexisting bookcase name"/>
+                <form:hidden path="user" value="${userName}"/>
+                <form:button type="submit">Add</form:button>
+            </form:form>
+        </c:if>
+
 
         <ul id="buttonlist">
             <li><img class="buttonup" src="../resources/arrow.png"/></li>
@@ -34,7 +44,7 @@
         <ul class="scrolllist">
             <c:forEach var="item" items="${searchlist}">
                 <c:url value="/bookcase?id=${item.getBookcaseID()}" var="x"/>
-                <li class="scrollitem"><a href="${x}"><table class="contenttable"><tr><td><img src="../resources/bookcase.png"/></td><td><h5>${item.getBookcaseName()}</h5><h6>user: Kyra</h6></td></tr></table></a></li>
+                <li class="scrollitem"><a href="${x}"><table class="contenttable"><tr><td><img src="../resources/bookcase.png"/></td><td><h5>${item.getBookcaseName()}</h5><h6>user: ${userName}</h6></td></tr></table></a></li>
             </c:forEach>
         </ul>
         <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>

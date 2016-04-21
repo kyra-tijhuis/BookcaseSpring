@@ -19,7 +19,8 @@
 <body>
 
 <article id="mainscreen">
-    ${bookcase.bookcaseName}
+    <h1>${bookcase.bookcaseName}</h1>
+    <button id="addplankbutton">Add plank!</button>
 
     <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
         <td id="plankcell"><ul id="planks">
@@ -38,6 +39,20 @@
     <td id="bookcaseright"></td></tr></table>
 
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
+
+
+    <script>
+        $(document).ready(
+            $('#addplankbutton').click(function() {
+                <c:url value="/addplank" var="targeturl"/>
+                $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
+
+                })
+            })
+        );
+
+    </script>
+
 </article>
 </body>
 </html>

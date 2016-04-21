@@ -4,6 +4,7 @@ import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
 import database.dao.BookcaseDAO;
 import database.goodreadsAPI.GoodreadsDAO;
+import database.dao.PlankDAO;
 import database.model.Book;
 import database.model.BookDetails;
 import database.model.Bookcase;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +31,9 @@ public class BookcaseController {
         ControllerFunctions.prepareLoginBar(request, error);
         try {
             int ID = Integer.parseInt(request.getParameter("id"));
-            Bookcase b = new BookcaseDAO().getBookcase(ID);
+            BookcaseDAO bookcaseDAO = new BookcaseDAO();
+            Bookcase b = bookcaseDAO.getBookcase(ID);
+            String username = bookcaseDAO.getUserFromBookcase(b).getUserName();
             if (b!=null) { // TODO check if bookcase exists in DB and import it
 
                 int height = -10;
@@ -40,6 +45,8 @@ public class BookcaseController {
                 model.addAttribute("bookcase", b);
                 
                 model.addAttribute("goodreadsDAO", new GoodreadsDAO());
+                model.addAttribute("userName", username);
+
 
                 return "Bookcase";
             } else {
@@ -49,6 +56,27 @@ public class BookcaseController {
             return "InvalidBookcase";
         }
     }
+
+
+    @RequestMapping(value="/addplank")
+    public @ResponseBody String addplank(String username, int bookcaseID, HttpSession session) {
+        if (session.getAttribute("user").equals(username)) {
+            PlankDAO plankDAO = new PlankDAO();
+            Plank plank = plankDAO.createPlank(300);
+            BookcaseDAO bookcaseDAO = new BookcaseDAO();
+            Bookcase bookcase = bookcaseDAO.getBookcase(bookcaseID);
+            bookcase.getPlanks().add(plank);
+            bookcaseDAO.updateBookcase(bookcase);
+        } else {
+            System.out.println("RANDOM");
+        }
+        return "test";
+    }
+
+
+
+
+
 
     @ModelAttribute("SearchForm")
     public SearchForm createSearchForm() {

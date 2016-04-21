@@ -50,7 +50,6 @@ public class BookcaseDAO {
         query.setParameter("bc", bookcase);
         try {
             user = (User) query.getSingleResult();
-            System.out.println(user.getUserID());
         } catch (NoResultException e) {
             System.out.println("No result");
         }
