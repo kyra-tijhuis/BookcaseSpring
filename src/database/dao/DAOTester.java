@@ -39,14 +39,15 @@ public class DAOTester {
         plank.getBooks().add(details);
 
         for (Bookcase b : user.getBookcases()) {
+            bookcaseDAO.getUserFromBookcase(b);
             System.out.println(b.getBookcaseID() + ": " + b.getBookcaseName());
         }
     }
 
     public static void main(String[] args) {
         DAOTester obj = new DAOTester();
-        obj.userTest();
-        obj.bookTest();
+//        obj.userTest();
+//        obj.bookTest();
         obj.putBookInBookcase();
         System.exit(0);
     }

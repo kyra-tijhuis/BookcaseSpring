@@ -51,4 +51,17 @@ public class BookcaseDAO {
         em.close();
         return result;
     }
+
+    public User getUserFromBookcase(Bookcase bookcase) {
+        User user = null;
+        Query query = emf.createEntityManager().createQuery("from User u where :bc member of u.bookcases");
+        query.setParameter("bc", bookcase);
+        try {
+            user = (User) query.getSingleResult();
+            System.out.println(user.getUserID());
+        } catch (NoResultException e) {
+            System.out.println("No result");
+        }
+        return user;
+    }
 }
