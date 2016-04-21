@@ -3,6 +3,7 @@ package bookcase.controller;
 import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
 import database.dao.BookcaseDAO;
+import database.goodreadsAPI.GoodreadsDAO;
 import database.model.Book;
 import database.model.BookDetails;
 import database.model.Bookcase;
@@ -35,12 +36,10 @@ public class BookcaseController {
                     height += 15 + plank.getHeight();
                 }
 
-
-
-
                 model.addAttribute("bookcaseheight", height);
                 model.addAttribute("bookcase", b);
-
+                
+                model.addAttribute("goodreadsDAO", new GoodreadsDAO());
 
                 return "Bookcase";
             } else {

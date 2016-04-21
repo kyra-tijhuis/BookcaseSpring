@@ -3,7 +3,7 @@ package database.goodreadsAPI;
 /**
  * Created by Kyra on 19/04/2016.
  */
-public class Request {
+class Request {
     private String key;
     private String method;
 

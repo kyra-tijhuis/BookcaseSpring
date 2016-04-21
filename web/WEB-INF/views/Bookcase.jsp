@@ -28,7 +28,7 @@
             <li class="books" style="height: ${plank.height}">
                 <ul class="booklist">
                     <c:forEach var="book" items="${plank.books}">
-                        <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="http://d.gr-assets.com/books/1387708305l/6300.jpg"/></li>
+                        <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}"/></li>
                     </c:forEach>
                 </ul>
             </li>

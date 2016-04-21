@@ -1,6 +1,8 @@
 package database.dao;
 
 import database.model.Plank;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,11 +10,15 @@ import java.util.ArrayList;
 /**
  * Created by Kyra on 15/04/2016.
  */
+@Repository
 public class PlankDAO {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
+    @PersistenceContext
+    private EntityManager em;
+//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
+    @Transactional
     public Plank getPlank(int plankID) {
-        return emf.createEntityManager().find(Plank.class, plankID);
+        return em.find(Plank.class, plankID);
     }
 
     /**
@@ -30,18 +36,13 @@ public class PlankDAO {
         return result;
     }
 
+    @Transactional
     public Plank createPlank(int height) {
         Plank result = new Plank();
         result.setHeight(height);
         result.setBooks(new ArrayList<>());
 
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
         em.persist(result);
-        t.commit();
-        em.close();
-
         return result;
     }
 
@@ -50,16 +51,9 @@ public class PlankDAO {
      * @param plank the updated Plank object
      * @return updated bookcase
      */
+    @Transactional
     public Plank updatePlank(Plank plank) {
-        Plank result = null;
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-
-        result = em.merge(plank);
-
-        t.commit();
-        em.close();
+        Plank result = em.merge(plank);
         return result;
     }
 }

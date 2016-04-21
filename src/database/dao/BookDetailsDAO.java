@@ -4,20 +4,23 @@ import database.model.Book;
 import database.model.BookDetails;
 import database.model.Orientation;
 import database.model.Plank;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 /**
  * Created by Kyra on 19/04/2016.
  */
+@Repository
 public class BookDetailsDAO {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
+    @PersistenceContext
+    private EntityManager em;
+//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
+    @Transactional
     public BookDetails getBookDetails(int bookDetailsID) {
-        return emf.createEntityManager().find(BookDetails.class, bookDetailsID);
+        return em.find(BookDetails.class, bookDetailsID);
     }
 
     public BookDetails createBookDetails(Book book, Orientation orientation, Plank plank, int bookIndex) {
@@ -27,7 +30,6 @@ public class BookDetailsDAO {
         details.setBookIndex(bookIndex);
         plank.getBooks().add(details);
 
-        EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
         t.begin();
         em.persist(details);
@@ -46,16 +48,9 @@ public class BookDetailsDAO {
      * @param bookDetails the updated BookDetails object
      * @return updated bookDetails
      */
+    @Transactional
     public BookDetails updateBookDetails(BookDetails bookDetails) {
-        BookDetails result = null;
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-
-        result = em.merge(bookDetails);
-
-        t.commit();
-        em.close();
+        BookDetails result = em.merge(bookDetails);
         return result;
     }
 }

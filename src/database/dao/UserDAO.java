@@ -2,6 +2,8 @@ package database.dao;
 
 import database.model.Bookcase;
 import database.model.User;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
@@ -12,12 +14,15 @@ import java.security.SecureRandom;
 /**
  * Created by Kyra on 14/04/2016.
  */
+@Repository
 public class UserDAO {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
+    @PersistenceContext
+    private EntityManager em;
 
+    @Transactional
     public User getUser(String userName) {
         User user = null;
-        Query query = emf.createEntityManager().createQuery("from User u where userName= :username");
+        Query query = em.createQuery("from User u where userName= :username");
         query.setParameter("username", userName);
         try {
             user = (User) query.getSingleResult();
@@ -33,6 +38,7 @@ public class UserDAO {
      * @param password the user's password
      * @return the newly created user, or null if the user already existed.
      */
+    @Transactional
     public User createUser(String userName, String password) {
         User existingUser = getUser(userName);
 
@@ -43,12 +49,7 @@ public class UserDAO {
             user.setSalt(salt);
             user.setPasswordHash(hashPasswordSalt(salt, password));
 
-            EntityManager em = emf.createEntityManager();
-            EntityTransaction t = em.getTransaction();
-            t.begin();
             em.persist(user);
-            t.commit();
-            em.close();
             return user;
         } else {
             return null;
@@ -60,16 +61,9 @@ public class UserDAO {
      * @param user the updated User object
      * @return updated user
      */
+    @Transactional
     public User updateUser(User user) {
-        User result = null;
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-
-        result = em.merge(user);
-
-        t.commit();
-        em.close();
+        User result = em.merge(user);
         return result;
     }
 
