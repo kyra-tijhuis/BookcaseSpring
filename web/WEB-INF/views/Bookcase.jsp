@@ -26,15 +26,16 @@
         <td id="plankcell"><ul id="planks">
             <li id="topplank"></li>
             <c:forEach var="plank" items="${bookcase.planks}">
-            <li class="books" style="height: ${plank.height}">
-                <ul class="booklist">
-                    <c:forEach var="book" items="${plank.books}">
-                        <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="http://d.gr-assets.com/books/1387708305l/6300.jpg"/></li>
-                    </c:forEach>
-                </ul>
-            </li>
-            <li class="plank"></li>
+                <li class="books" id="${plank.plankID}" style="height: ${plank.height}">
+                    <ul class="booklist">
+                        <c:forEach var="book" items="${plank.books}">
+                            <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="http://d.gr-assets.com/books/1387708305l/6300.jpg"/></li>
+                        </c:forEach>
+                    </ul>
+                </li>
+                <li class="plank"></li>
             </c:forEach>
+
         </ul></td>
     <td id="bookcaseright"></td></tr></table>
 
@@ -46,12 +47,16 @@
             $('#addplankbutton').click(function() {
                 <c:url value="/addplank" var="targeturl"/>
                 $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
-
+                    var string = '<li class="books" id="'+data+'" style="height: 300"><ul class="booklist"></ul></li><li class="plank"></li>'
+                    $('#planks').append(string);
                 })
             })
         );
-
     </script>
+
+
+
+
 
 </article>
 </body>

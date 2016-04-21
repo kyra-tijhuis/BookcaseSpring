@@ -67,10 +67,10 @@ public class BookcaseController {
             Bookcase bookcase = bookcaseDAO.getBookcase(bookcaseID);
             bookcase.getPlanks().add(plank);
             bookcaseDAO.updateBookcase(bookcase);
-        } else {
-            System.out.println("RANDOM");
+            System.out.println(plank.getPlankID());
+            return "" + plank.getPlankID();
         }
-        return "test";
+        return null;
     }
 
 

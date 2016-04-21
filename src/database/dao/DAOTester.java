@@ -19,16 +19,16 @@ public class DAOTester {
     }
 
     private void bookTest() {
-        new BookDAO().createBook("1234567890124", "Title", "Author", 250, 150, 20);
+        new BookDAO().createBook("9780545139700", "Harry Potter and the Deathly Hallows", "JK Rowling", 250, 150, 20);
     }
 
     private void putBookInBookcase() {
         UserDAO userDAO = new UserDAO();
         BookcaseDAO bookcaseDAO = new BookcaseDAO();
         PlankDAO plankDAO = new PlankDAO();
-        Book book = new BookDAO().getBook("1234567890124");
+        Book book = new BookDAO().getBook("9780545139700");
         User user = userDAO.getUser("Alice");
-        Bookcase bookcase = bookcaseDAO.createBookcase("Boekenkast", 800);
+        Bookcase bookcase = bookcaseDAO.createBookcase("Harry Potter", 800);
         user.getBookcases().add(bookcase);
         userDAO.updateUser(user);
         Plank plank = plankDAO.createPlank(300);
@@ -46,8 +46,8 @@ public class DAOTester {
 
     public static void main(String[] args) {
         DAOTester obj = new DAOTester();
-//        obj.userTest();
-//        obj.bookTest();
+        obj.userTest();
+        obj.bookTest();
         obj.putBookInBookcase();
         System.exit(0);
     }
