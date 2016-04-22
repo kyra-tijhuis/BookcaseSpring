@@ -1,9 +1,8 @@
 package database.dao;
 
-import database.model.BookDetails;
-import database.model.Bookcase;
-import database.model.Plank;
-import database.model.User;
+import database.model.*;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,26 +11,24 @@ import java.util.List;
 /**
  * Created by Kyra on 19/04/2016.
  */
+@Repository
 public class BookcaseDAO {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
+    @PersistenceContext
+    private EntityManager em;
 
+    @Transactional
     public Bookcase getBookcase(int bookcaseID) {
-        return emf.createEntityManager().find(Bookcase.class, bookcaseID);
+        return em.find(Bookcase.class, bookcaseID);
     }
 
+    @Transactional
     public Bookcase createBookcase(String name, int width) {
         Bookcase result = new Bookcase();
         result.setBookcaseName(name);
         result.setWidth(width);
         result.setPlanks(new ArrayList<Plank>());
 
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
         em.persist(result);
-        t.commit();
-        em.close();
-
         return result;
     }
 
@@ -40,22 +37,16 @@ public class BookcaseDAO {
      * @param bookcase the updated Bookcase object
      * @return updated bookcase
      */
+    @Transactional
     public Bookcase updateBookcase(Bookcase bookcase) {
-        Bookcase result = null;
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-
-        result = em.merge(bookcase);
-
-        t.commit();
-        em.close();
+        Bookcase result = em.merge(bookcase);
         return result;
     }
 
+    @Transactional
     public User getUserFromBookcase(Bookcase bookcase) {
         User user = null;
-        Query query = emf.createEntityManager().createQuery("from User u where :bc member of u.bookcases");
+        Query query = em.createQuery("from User u where :bc member of u.bookcases");
         query.setParameter("bc", bookcase);
         try {
             user = (User) query.getSingleResult();
@@ -65,7 +56,15 @@ public class BookcaseDAO {
         return user;
     }
 
+    @Transactional
     public List<Bookcase> getAllBookcases() {
-        return emf.createEntityManager().createQuery("from Bookcase").getResultList();
+        return em.createQuery("from Bookcase").getResultList();
+    }
+
+    @Transactional
+    public List<Bookcase> searchBookcases(String searchTerm) {
+        Query query = em.createQuery("from Bookcase b where b.bookcaseName = :name");
+        query.setParameter("name", searchTerm);
+        return query.getResultList();
     }
 }

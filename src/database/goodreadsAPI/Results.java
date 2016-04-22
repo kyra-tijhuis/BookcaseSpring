@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Kyra on 19/04/2016.
  */
-public class Results {
+class Results {
 
     private List<Work> work;
 

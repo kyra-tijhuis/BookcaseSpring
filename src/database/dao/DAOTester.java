@@ -19,7 +19,14 @@ public class DAOTester {
     }
 
     private void bookTest() {
-        new BookDAO().createBook("9780545139700", "Harry Potter and the Deathly Hallows", "JK Rowling", 250, 150, 20);
+        BookDAO bookDAO = new BookDAO();
+        bookDAO.createBook("9780545139700", "Harry Potter and the Deathly Hallows", "JK Rowling", 250, 150, 20);
+        for (Book b : bookDAO.searchBooks("Titl")) {
+            System.out.println(b);
+        }
+        for (Book b : bookDAO.searchExactBooks("Man")) {
+            System.out.println(b);
+        }
     }
 
     private void putBookInBookcase() {
@@ -46,9 +53,10 @@ public class DAOTester {
 
     public static void main(String[] args) {
         DAOTester obj = new DAOTester();
-        obj.userTest();
+//        obj.userTest();
         obj.bookTest();
         obj.putBookInBookcase();
+//        new BookcaseDAO().getAllBookcases();
         System.exit(0);
     }
 }

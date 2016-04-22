@@ -1,21 +1,24 @@
 package database.dao;
 
 import database.model.Book;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import java.io.File;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Kyra on 15/04/2016.
  */
+@Repository
 public class BookDAO {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
+    @PersistenceContext
+    private EntityManager em;
+//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
+    @Transactional
     public Book getBook(String isbn){
-        return emf.createEntityManager().find(Book.class, isbn);
+        return em.find(Book.class, isbn);
     }
 
     /**
@@ -41,7 +44,6 @@ public class BookDAO {
             result.setWidth(width);
             result.setThickness(thickness);
 
-            EntityManager em = emf.createEntityManager();
             EntityTransaction t = em.getTransaction();
             t.begin();
             em.persist(result);
@@ -56,16 +58,27 @@ public class BookDAO {
      * @param book the updated Book object
      * @return updated book
      */
+    @Transactional
     public Book updateBook(Book book) {
-        Book result = null;
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-        t.begin();
-
-        result = em.merge(book);
-
-        t.commit();
-        em.close();
+        Book result = em.merge(book);
         return result;
+    }
+
+    @Transactional
+    public List<Book> searchBooks(String searchTerm) {
+        Query query = em.createQuery(
+                "from Book b where b.bookTitle like :title or b.author like :author");
+        query.setParameter("title", "%" + searchTerm + "%");
+        query.setParameter("author", "%" + searchTerm + "%");
+        return query.getResultList();
+    }
+
+    @Transactional
+    public List<Book> searchExactBooks(String searchTerm) {
+        Query query = em.createQuery(
+                "from Book b where b.bookTitle like :title or b.author like :author");
+        query.setParameter("title", searchTerm);
+        query.setParameter("author", searchTerm);
+        return query.getResultList();
     }
 }

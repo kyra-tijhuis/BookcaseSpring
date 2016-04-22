@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Created by Kyra on 19/04/2016.
  */
 @XmlRootElement(name= "GoodreadsResponse")
-public class GoodreadsResponse {
+class GoodreadsResponse {
     private Request request;
 
     @XmlElement(name = "Request")
