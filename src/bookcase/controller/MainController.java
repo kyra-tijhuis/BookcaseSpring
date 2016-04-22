@@ -145,6 +145,8 @@ public class MainController {
         if (activeUser != null) {
             request.setAttribute("userName", activeUser.getUserName());
             request.setAttribute("searchlist", activeUser.getBookcases());
+            
+
 
             return "User";
         } else {

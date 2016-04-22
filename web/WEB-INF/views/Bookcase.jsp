@@ -147,7 +147,11 @@
 
 <article id="mainscreen">
     <h1>${bookcase.bookcaseName}</h1>
-    <button id="addplankbutton">Add plank!</button>
+    <h4>A bookcase by ${userName}</h4>
+
+    <c:if test="${user == userName}">
+        <button id="addplankbutton">Add plank!</button>
+    </c:if>
 
     <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
         <td id="plankcell"><ul id="planks">
@@ -164,14 +168,25 @@
             </c:forEach>
 
         </ul></td>
-    <td id="bookcaseright"></td></tr></table>
+    <td id="bookcaseright"></td>
+    </tr></table>
+
+    <table id="buttontable">
+        <ul id="buttonlist">
+            <c:forEach var="plank" items="${bookcase.planks}">
+                <li class="buttons"  style="height: ${plank.height + 15}">
+                    <button class="addbutton" data-plankid="${plank.plankID}">Add book to this plank</button>
+                </li>
+            </c:forEach>
+        </ul>
+    </table>
 
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
 
 
 
     <script>
-        $(document).ready(
+        $(document).ready(function() {
             $('#addplankbutton').click(function() {
                 <c:url value="/addplank" var="targeturl"/>
                 $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
@@ -179,6 +194,35 @@
                     $('#planks').append(string);
                 })
             })
+
+            $('.addbutton').click(function() {
+                <c:url value="/addbook" var="targeturl"/>
+                var plankid = $(this).data("plankid");
+                $.get("${targeturl}", {username:"${userName}", plankID: plankid}, function(data) {
+
+
+                    var width = data[0];
+                    var bookheight = data[1];
+                    var plankheight = data[2];
+                    var imageurl = data[3];
+
+                    var string = '<li class="book" style="width:'+ width +'"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>'
+                    console.log(string);
+
+                    var jquerystring = '#' + plankid + ' .booklist';
+                    console.log(jquerystring);
+
+                    $(jquerystring).append(string);
+
+
+
+                })
+
+            })
+        }
+
+
+
         );
     </script>
 
