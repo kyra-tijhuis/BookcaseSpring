@@ -3,12 +3,11 @@ package bookcase.controller;
 import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
 import database.dao.BookDAO;
+import database.dao.BookDetailsDAO;
 import database.dao.BookcaseDAO;
 import database.goodreadsAPI.GoodreadsDAO;
 import database.dao.PlankDAO;
-import database.model.Book;
-import database.model.Bookcase;
-import database.model.Plank;
+import database.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -29,6 +28,8 @@ import java.util.ArrayList;
 
 @Controller
 public class BookcaseController {
+    @Autowired
+    private BookDetailsDAO bookDetailsDAO;
 
     @Autowired
     private BookcaseDAO bookcaseDAO;
@@ -88,11 +89,20 @@ public class BookcaseController {
     }
 
     @RequestMapping(value="/addbook")
-    public @ResponseBody String[] addbook(String username, String plankID, HttpSession session, HttpServletResponse resp) {
+    public @ResponseBody String[] addbook(String username, String plankID, String ISBN, String Title, String Author, HttpSession session, HttpServletResponse resp) {
         String[] returnstring = new String[4];
 
-        Book b = bookDAO.getBook("9780545139700");
+        System.out.println(plankID + " " + ISBN + " " + Title + " " + Author);
+
+
+
+
+
+        Book b = bookDAO.createBook(ISBN, Title, Author, 200, 150, 20);
         Plank p = plankDAO.getPlank(Integer.parseInt(plankID));
+        BookDetails details = bookDetailsDAO.createBookDetails(b, Orientation.COVER, p, plankDAO.firstEmptyOnPlank(p.getPlankID()));
+        p.getBooks().add(details);
+        plankDAO.updatePlank(p);
         GoodreadsDAO goodreadsDAO = new GoodreadsDAO();
 
 
@@ -104,11 +114,14 @@ public class BookcaseController {
         returnstring[0]= width;
         returnstring[1]= bookheight;
         returnstring[2]= plankheight;
-        returnstring[3]= goodreadsDAO.getImage("9780545139700");
+        returnstring[3]= goodreadsDAO.getImage(ISBN);
 
 
-        if (session.getAttribute("user").equals(username)) {
+        if (session.getAttribute("user") != null && session.getAttribute("user").equals(username)) {
+
             return returnstring;
+        } else {
+            System.out.println("hallo");
         }
         try {
             resp.sendError(401);

@@ -30,8 +30,74 @@
         .ui-dialog .ui-state-error { padding: .3em; }
         .validateTips { border: 1px solid transparent; padding: 0.3em; }
     </style>
+
+</head>
+<body>
+
+<div id="dialog-form" title="Add book">
+    <p class="validateTips">All form fields are required.</p>
+
+    <form>
+        <fieldset>
+            <label for="isbn">ISBN</label>
+            <input type="text" name="isbn" id="isbn" placeholder="1234567890123" class="text ui-widget-content ui-corner-all">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" placeholder="Book title" class="text ui-widget-content ui-corner-all">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" placeholder="A. Author" class="text ui-widget-content ui-corner-all">
+
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
+
+
+
+<article id="mainscreen">
+    <h1>${bookcase.bookcaseName}</h1>
+    <h4>A bookcase by ${userName}</h4>
+
+    <c:if test="${user == userName}">
+        <button id="addplankbutton">Add plank!</button>
+    </c:if>
+
+    <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
+        <td id="plankcell"><ul id="planks">
+            <li id="topplank"></li>
+            <c:forEach var="plank" items="${bookcase.planks}">
+                <li class="books" id="${plank.plankID}" style="height: ${plank.height}">
+                    <ul class="booklist">
+                        <c:forEach var="book" items="${plank.books}">
+                            <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
+                        </c:forEach>
+                    </ul>
+                </li>
+                <li class="plank"></li>
+            </c:forEach>
+
+        </ul></td>
+    <td id="bookcaseright"></td>
+    </tr></table>
+
+    <table id="buttontable">
+        <ul id="buttonlist">
+            <c:forEach var="plank" items="${bookcase.planks}">
+                <li class="buttons"  style="height: ${plank.height + 15}">
+                    <button class="addbutton" data-plankid="${plank.plankID}">Add book to this plank</button>
+                </li>
+            </c:forEach>
+        </ul>
+    </table>
+
+    <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
+
+
+
     <script>
         $(function() {
+            var ISBN, Title, Author, plankid;
+
             var dialog, form,
 
             // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
@@ -85,11 +151,9 @@
                 valid = valid && checkRegexp( author, /^([0-9a-zA-Z.,&+/?'-])+$/, "The author of the book" );
 
                 if ( valid ) {
-//                    $( "#users tbody" ).append( "<tr>" +
-//                            "<td>" + isbn.val() + "</td>" +
-//                            "<td>" + title.val() + "</td>" +
-//                            "<td>" + author.val() + "</td>" +
-//                            "</tr>" );
+                    ISBN = isbn.val();
+                    Title = title.val();
+                    Author = author.val();
                     dialog.dialog( "close" );
                 }
                 return valid;
@@ -109,6 +173,31 @@
                 close: function() {
                     form[ 0 ].reset();
                     allFields.removeClass( "ui-state-error" );
+
+
+                    <c:url value="/addbook" var="targeturl"/>
+                    $.get("${targeturl}", {username:"${userName}", plankID: plankid, ISBN: ISBN, Title: Title, Author: Author}, function(data) {
+                        console.log(data[0]);
+
+                        var width = data[0];
+                        var bookheight = data[1];
+                        var plankheight = data[2];
+                        var imageurl = data[3];
+
+                        var string = '<li class="book" style="width:'+ width +'"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>'
+                        console.log(string);
+
+                        var jquerystring = '#' + plankid + ' .booklist';
+                        console.log(jquerystring);
+
+                        $(jquerystring).append(string);
+
+
+
+                    })
+
+
+
                 }
             });
 
@@ -117,75 +206,18 @@
                 addBook();
             });
 
-            $( "#add-book" ).button().on( "click", function() {
+            $('.addbutton').click(function() {
+                plankid = $(this).data("plankid");
+
                 dialog.dialog( "open" );
-            });
+
+            })
         });
-    </script>
-</head>
-<body>
-
-<div id="dialog-form" title="Add book">
-    <p class="validateTips">All form fields are required.</p>
-
-    <form>
-        <fieldset>
-            <label for="isbn">ISBN</label>
-            <input type="text" name="isbn" id="isbn" placeholder="1234567890123" class="text ui-widget-content ui-corner-all">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="Book title" class="text ui-widget-content ui-corner-all">
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" placeholder="A. Author" class="text ui-widget-content ui-corner-all">
-
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
-            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-    </form>
-</div>
-
-<button id="add-book">Add book</button>
-
-<article id="mainscreen">
-    <h1>${bookcase.bookcaseName}</h1>
-    <h4>A bookcase by ${userName}</h4>
-
-    <c:if test="${user == userName}">
-        <button id="addplankbutton">Add plank!</button>
-    </c:if>
-
-    <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
-        <td id="plankcell"><ul id="planks">
-            <li id="topplank"></li>
-            <c:forEach var="plank" items="${bookcase.planks}">
-                <li class="books" id="${plank.plankID}" style="height: ${plank.height}">
-                    <ul class="booklist">
-                        <c:forEach var="book" items="${plank.books}">
-                            <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
-                        </c:forEach>
-                    </ul>
-                </li>
-                <li class="plank"></li>
-            </c:forEach>
-
-        </ul></td>
-    <td id="bookcaseright"></td>
-    </tr></table>
-
-    <table id="buttontable">
-        <ul id="buttonlist">
-            <c:forEach var="plank" items="${bookcase.planks}">
-                <li class="buttons"  style="height: ${plank.height + 15}">
-                    <button class="addbutton" data-plankid="${plank.plankID}">Add book to this plank</button>
-                </li>
-            </c:forEach>
-        </ul>
-    </table>
-
-    <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
 
 
 
-    <script>
+
+
         $(document).ready(function() {
             $('#addplankbutton').click(function() {
                 <c:url value="/addplank" var="targeturl"/>
@@ -195,35 +227,18 @@
                 })
             })
 
-            $('.addbutton').click(function() {
-                <c:url value="/addbook" var="targeturl"/>
-                var plankid = $(this).data("plankid");
-                $.get("${targeturl}", {username:"${userName}", plankID: plankid}, function(data) {
-
-
-                    var width = data[0];
-                    var bookheight = data[1];
-                    var plankheight = data[2];
-                    var imageurl = data[3];
-
-                    var string = '<li class="book" style="width:'+ width +'"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>'
-                    console.log(string);
-
-                    var jquerystring = '#' + plankid + ' .booklist';
-                    console.log(jquerystring);
-
-                    $(jquerystring).append(string);
 
 
 
-                })
-
-            })
         }
 
 
 
         );
+
+
+
+
     </script>
 
 

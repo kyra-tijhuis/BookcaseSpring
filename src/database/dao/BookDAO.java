@@ -32,6 +32,7 @@ public class BookDAO {
      * @param thickness in mm
      * @return a Book, newly created or retrieved from the database.
      */
+    @Transactional
     public Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness) {
         Book result = getBook(isbn);
         if (result==null) {
@@ -44,11 +45,7 @@ public class BookDAO {
             result.setWidth(width);
             result.setThickness(thickness);
 
-            EntityTransaction t = em.getTransaction();
-            t.begin();
             em.persist(result);
-            t.commit();
-            em.close();
         }
         return result;
     }
