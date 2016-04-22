@@ -13,7 +13,6 @@
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-core-5.0.2.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-entitymanager-5.0.2.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-java8-5.0.2.Final.jar!/" />
-      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.0.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-validator-4.1.0.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jackson-annotations-2.5.0.jar!/" />
@@ -25,7 +24,6 @@
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.ejb.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.inject-1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.jms.jar!/" />
-      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.persistence.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.resource.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jsp.jar!/" />
@@ -49,13 +47,18 @@
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-context-4.2.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-core-4.2.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-expression-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-jdbc-4.2.2.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-orm-4.2.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-security-core-4.0.1.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-security-web-4.0.1.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-tx-4.2.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-web-4.2.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/spring-webmvc-4.2.2.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/validation-api-1.0.0.GA.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.persistence-2.1.0-rc1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

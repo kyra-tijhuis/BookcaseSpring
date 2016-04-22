@@ -20,7 +20,11 @@
 
 <article id="mainscreen">
     <h1>${bookcase.bookcaseName}</h1>
-    <button id="addplankbutton">Add plank!</button>
+    <h4>A bookcase by ${userName}</h4>
+
+    <c:if test="${user == userName}">
+        <button id="addplankbutton">Add plank!</button>
+    </c:if>
 
     <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
         <td id="plankcell"><ul id="planks">
@@ -47,8 +51,10 @@
             $('#addplankbutton').click(function() {
                 <c:url value="/addplank" var="targeturl"/>
                 $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
-                    var string = '<li class="books" id="'+data+'" style="height: 300"><ul class="booklist"></ul></li><li class="plank"></li>'
-                    $('#planks').append(string);
+                        var string = '<li class="books" id="'+data+'" style="height: 300"><ul class="booklist"></ul></li><li class="plank"></li>'
+                        $('#planks').append(string);
+
+
                 })
             })
         );
