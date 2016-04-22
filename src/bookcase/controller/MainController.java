@@ -16,6 +16,7 @@ import database.dao.UserDAO;
 import database.model.Bookcase;
 import database.model.Plank;
 import database.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,15 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private BookcaseDAO bookcaseDAO;
+
+    @Autowired
+    private PlankDAO plankDAO;
+
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
 
@@ -45,10 +55,8 @@ public class MainController {
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(LoginForm login, HttpSession session, RedirectAttributes redirectAttributes){
-        UserDAO dao = new UserDAO();
-
-        if (dao.getUser(login.getUsername()) != null) {
-            if (dao.correctPassword(login.getUsername(), login.getPassword())) {
+        if (userDAO.getUser(login.getUsername()) != null) {
+            if (userDAO.correctPassword(login.getUsername(), login.getPassword())) {
                 session.setAttribute("user", login.getUsername());
             } else {
                 redirectAttributes.addFlashAttribute("error", "password");
@@ -86,8 +94,7 @@ public class MainController {
         }
 
         if(!result.hasErrors()) {
-            UserDAO dao = new UserDAO();
-            User user = dao.createUser(userForm.getUsername(), userForm.getPassword());
+            User user = userDAO.createUser(userForm.getUsername(), userForm.getPassword());
             if (user == null) {
                 result.addError(new FieldError("userForm", "username", "Username taken!"));
             }
@@ -112,7 +119,6 @@ public class MainController {
     @RequestMapping(value="/search")
     public String searchGet(HttpServletRequest request, Model model, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
         ControllerFunctions.prepareLoginBar(request, error);
-        BookcaseDAO bookcaseDAO = new BookcaseDAO();
         List<Bookcase> bookcaseList = bookcaseDAO.getAllBookcases();
 
         model.addAttribute("searchlist", bookcaseList);
@@ -127,7 +133,7 @@ public class MainController {
         ControllerFunctions.prepareLoginBar(request, error);
 
         String url = request.getRequestURL().toString();
-        User activeUser = new UserDAO().getUser(url.substring(url.lastIndexOf("/")+1).toString());
+        User activeUser = userDAO.getUser(url.substring(url.lastIndexOf("/")+1).toString());
 
         if (result.hasErrors()) {
             System.out.println(result.getFieldError("name"));
@@ -149,7 +155,6 @@ public class MainController {
     @RequestMapping(value="/addcase", method=RequestMethod.POST)
     public String addbookcase(@Valid AddCaseForm inputform, BindingResult result, HttpSession session) {
         if (inputform.getUser().equals(session.getAttribute("user"))) {
-            UserDAO userDAO = new UserDAO();
             User user = userDAO.getUser(inputform.getUser());
             if (user != null) {
                 for (Bookcase b :  user.getBookcases()) {
@@ -158,11 +163,9 @@ public class MainController {
                     }
                 }
                 if (!result.hasErrors()) {
-                    BookcaseDAO bookcaseDAO = new BookcaseDAO();
                     Bookcase bookcase = bookcaseDAO.createBookcase(inputform.getName(), 1000);
                     user.getBookcases().add(bookcase);
                     userDAO.updateUser(user);
-                    PlankDAO plankDAO = new PlankDAO();
                     Plank plank = plankDAO.createPlank(300);
                     bookcase.getPlanks().add(plank);
                     bookcaseDAO.updateBookcase(bookcase);
