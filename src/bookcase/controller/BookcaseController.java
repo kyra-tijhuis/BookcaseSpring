@@ -2,9 +2,11 @@ package bookcase.controller;
 
 import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
+import database.dao.BookDAO;
 import database.dao.BookcaseDAO;
 import database.goodreadsAPI.GoodreadsDAO;
 import database.dao.PlankDAO;
+import database.model.Book;
 import database.model.Bookcase;
 import database.model.Plank;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class BookcaseController {
 
     @Autowired
     private PlankDAO plankDAO;
+
+    @Autowired
+    private BookDAO bookDAO;
 
     @RequestMapping(value="/bookcase")
     public String bookcases(HttpServletRequest request, HttpServletResponse resp, @ModelAttribute("error") String error, Model model) {
@@ -72,7 +77,6 @@ public class BookcaseController {
             Bookcase bookcase = bookcaseDAO.getBookcase(bookcaseID);
             bookcase.getPlanks().add(plank);
             bookcaseDAO.updateBookcase(bookcase);
-            System.out.println(plank.getPlankID());
             return "" + plank.getPlankID();
         }
         try {
@@ -83,7 +87,36 @@ public class BookcaseController {
         return null;
     }
 
+    @RequestMapping(value="/addbook")
+    public @ResponseBody String[] addbook(String username, String plankID, HttpSession session, HttpServletResponse resp) {
+        String[] returnstring = new String[4];
 
+        Book b = bookDAO.getBook("9780545139700");
+        Plank p = plankDAO.getPlank(Integer.parseInt(plankID));
+        GoodreadsDAO goodreadsDAO = new GoodreadsDAO();
+
+
+
+        String width = "" + b.getWidth();
+        String bookheight = "" + b.getHeight();
+        String plankheight = "" + p.getHeight();
+
+        returnstring[0]= width;
+        returnstring[1]= bookheight;
+        returnstring[2]= plankheight;
+        returnstring[3]= goodreadsDAO.getImage("9780545139700");
+
+
+        if (session.getAttribute("user").equals(username)) {
+            return returnstring;
+        }
+        try {
+            resp.sendError(401);
+        } catch (IOException io) {
+
+        }
+        return null;
+    }
 
 
 
