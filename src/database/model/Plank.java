@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Kyra on 14/04/2016.
@@ -12,7 +13,7 @@ import java.util.Collection;
 public class Plank {
     private int plankID;
     private int height;
-    private Collection<BookDetails> books;
+    private List<BookDetails> books;
 
     @Id
     @GeneratedValue(generator="increment")
@@ -33,12 +34,12 @@ public class Plank {
         this.height = height;
     }
 
-    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = BookDetails.class)
-    public Collection<BookDetails> getBooks() {
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = BookDetails.class)
+    public List<BookDetails> getBooks() {
         return books;
     }
 
-    public void setBooks(Collection<BookDetails> books) {
+    public void setBooks(List<BookDetails> books) {
         this.books = books;
     }
 

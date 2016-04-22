@@ -14,7 +14,7 @@ public class Bookcase {
     private String bookcaseName;
     private int bookcaseID;
     private int width;
-    private Collection<Plank> planks;
+    private List<Plank> planks;
 
     public String getBookcaseName() {
         return bookcaseName;
@@ -43,12 +43,12 @@ public class Bookcase {
         this.width = width;
     }
 
-    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Plank.class)
-    public Collection<Plank> getPlanks() {
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Plank.class)
+    public List<Plank> getPlanks() {
         return planks;
     }
 
-    public void setPlanks(Collection<Plank> planks) {
+    public void setPlanks(List<Plank> planks) {
         this.planks = planks;
     }
 

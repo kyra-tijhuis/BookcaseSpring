@@ -54,7 +54,7 @@ public class BookDetails {
         this.bookIndex = bookIndex;
     }
 
-    @ManyToOne(targetEntity = Plank.class,cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Plank.class,cascade = {CascadeType.ALL})
     public Plank getPlank() {
         return plank;
     }

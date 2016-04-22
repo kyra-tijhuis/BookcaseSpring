@@ -15,7 +15,7 @@ public class User {
     private String userName;
     private String passwordHash;
     private String salt;
-    private Collection<Bookcase> bookcases;
+    private List<Bookcase> bookcases;
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -53,8 +53,8 @@ public class User {
         this.salt = salt;
     }
 
-    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Bookcase.class)
-    public Collection<Bookcase> getBookcases() {
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Bookcase.class)
+    public List<Bookcase> getBookcases() {
         return bookcases;
     }
 
@@ -62,7 +62,7 @@ public class User {
      * @deprecated Use getBookcases().add(Bookcase bookcase)
      * @param bookcases
      */
-    public void setBookcases(Collection<Bookcase> bookcases) {
+    public void setBookcases(List<Bookcase> bookcases) {
         this.bookcases = bookcases;
     }
 
