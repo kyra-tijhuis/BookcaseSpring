@@ -32,7 +32,7 @@ public class BookcaseController {
     private PlankDAO plankDAO;
 
     @RequestMapping(value="/bookcase")
-    public String bookcases (HttpServletRequest request, @ModelAttribute("error") String error, Model model) {
+    public String bookcases(HttpServletRequest request, @ModelAttribute("error") String error, Model model) {
         ControllerFunctions.prepareLoginBar(request, error);
         try {
             int ID = Integer.parseInt(request.getParameter("id"));

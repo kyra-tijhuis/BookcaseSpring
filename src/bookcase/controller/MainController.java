@@ -43,10 +43,12 @@ public class MainController {
     @Autowired
     private PlankDAO plankDAO;
 
+
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
 
         ControllerFunctions.prepareLoginBar(request, error);
+
         return "MainScreen";
     }
 
