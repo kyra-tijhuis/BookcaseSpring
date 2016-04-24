@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import bookcase.forms.AddCaseForm;
 import bookcase.forms.SignupForm;
 import database.dao.BookcaseDAO;
+import database.dao.DataOperations;
 import database.dao.PlankDAO;
 import database.dao.UserDAO;
 import database.model.Bookcase;
@@ -43,6 +44,8 @@ public class MainController {
     @Autowired
     private PlankDAO plankDAO;
 
+    @Autowired
+    private DataOperations dao;
 
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
@@ -159,7 +162,7 @@ public class MainController {
     @RequestMapping(value="/addcase", method=RequestMethod.POST)
     public String addbookcase(@Valid AddCaseForm inputform, BindingResult result, HttpSession session) {
         if (inputform.getUser().equals(session.getAttribute("user"))) {
-            User user = userDAO.getUser(inputform.getUser());
+            User user = dao.getUser(inputform.getUser());
             if (user != null) {
                 for (Bookcase b :  user.getBookcases()) {
                     if (b.getBookcaseName().equals(inputform.getName())) {

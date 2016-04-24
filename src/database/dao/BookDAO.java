@@ -34,19 +34,15 @@ public class BookDAO {
      */
     @Transactional
     public Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness) {
-        Book result = getBook(isbn);
-        if (result==null) {
-            result = new Book();
-            // new book
-            result.setIsbn(isbn);
-            result.setBookTitle(bookTitle);
-            result.setAuthor(author);
-            result.setHeight(height);
-            result.setWidth(width);
-            result.setThickness(thickness);
+        Book result = new Book();
+        result.setIsbn(isbn);
+        result.setBookTitle(bookTitle);
+        result.setAuthor(author);
+        result.setHeight(height);
+        result.setWidth(width);
+        result.setThickness(thickness);
 
-            em.persist(result);
-        }
+        em.persist(result);
         return result;
     }
 

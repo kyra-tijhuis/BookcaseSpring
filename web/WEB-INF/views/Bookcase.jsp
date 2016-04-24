@@ -75,11 +75,9 @@
                 </li>
                 <li class="plank"></li>
             </c:forEach>
-
         </ul></td>
-    <td id="bookcaseright"></td>
+        <td id="bookcaseright"></td>
     </tr></table>
-
     <table id="buttontable">
         <ul id="buttonlist">
             <c:forEach var="plank" items="${bookcase.planks}">
@@ -89,7 +87,6 @@
             </c:forEach>
         </ul>
     </table>
-
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
 
 
@@ -97,17 +94,14 @@
     <script>
         $(function() {
             var ISBN, Title, Author, plankid;
-
             var dialog, form,
-
             // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-                    titleRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+$/,
+                    titleRegex = /^([a-zA-Z0-9.,;:!#$%&'*+\/=—?^_`{|}~\s-])+$/,
                     isbn = $( "#isbn" ),
                     title = $( "#title" ),
                     author = $( "#author" ),
                     allFields = $( [] ).add( isbn ).add( title ).add( author ),
                     tips = $( ".validateTips" );
-
             function updateTips( t ) {
                 tips
                         .text( t )
@@ -116,7 +110,6 @@
                     tips.removeClass( "ui-state-highlight", 1500 );
                 }, 500 );
             }
-
             function checkLength( o, n, min, max ) {
                 if ( o.val().length > max || o.val().length < min ) {
                     o.addClass( "ui-state-error" );
@@ -127,7 +120,6 @@
                     return true;
                 }
             }
-
             function checkRegexp( o, regexp, n ) {
                 if ( !( regexp.test( o.val() ) ) ) {
                     o.addClass( "ui-state-error" );
@@ -137,26 +129,40 @@
                     return true;
                 }
             }
-
-            function addBook() {
+            function checkBook() {
                 var valid = true;
                 allFields.removeClass( "ui-state-error" );
-
                 valid = valid && checkLength( isbn, "ISBN", 10, 13 );
-                valid = valid && checkLength( title, "title", 1, 100 );
-                valid = valid && checkLength( author, "author", 1, 100 );
+                valid = valid && checkLength( title, "the book title", 1, 140 );
+                valid = valid && checkLength( author, "the author", 1, 140 );
 
-                valid = valid && checkRegexp( isbn, /^([0-9])+$/i, "ISBN must consist of 10 or 13 numbers." );
-                valid = valid && checkRegexp( title, titleRegex, "The title of the book" );
-                valid = valid && checkRegexp( author, /^([0-9a-zA-Z.,&+/?'-])+$/, "The author of the book" );
-
+                valid = valid && checkRegexp( isbn, /^([0-9xX])+$/i, "ISBN must consist of 10 or 13 numbers." );
+                valid = valid && checkRegexp( title, titleRegex, "The title of the book may consist of letters, numbers and special characters." );
+                valid = valid && checkRegexp( author, /^([0-9a-zA-Z.,&+/?\s'-])+$/, "The author of the book may consist of letters, numbers and the characters .,&+/?' and space." );
                 if ( valid ) {
                     ISBN = isbn.val();
                     Title = title.val();
                     Author = author.val();
+                    addBook();
                     dialog.dialog( "close" );
                 }
                 return valid;
+            }
+            
+            function addBook() {
+                <c:url value="/addbook" var="targeturl"/>
+                $.get("${targeturl}", {username:"${userName}", plankID: plankid, isbn: ISBN, title: Title, author: Author}, function(data) {
+                    console.log(data[0]);
+                    var width = data[0];
+                    var bookheight = data[1];
+                    var plankheight = data[2];
+                    var imageurl = data[3];
+                    var string = '<li class="book" style="width:'+ width +'"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>'
+                    console.log(string);
+                    var jquerystring = '#' + plankid + ' .booklist';
+                    console.log(jquerystring);
+                    $(jquerystring).append(string);
+                })
             }
 
             dialog = $( "#dialog-form" ).dialog({
@@ -165,7 +171,7 @@
                 width: 350,
                 modal: true,
                 buttons: {
-                    "Add a book": addBook,
+                    "Add a book": checkBook,
                     Cancel: function() {
                         dialog.dialog( "close" );
                     }
@@ -174,78 +180,28 @@
                     form[ 0 ].reset();
                     allFields.removeClass( "ui-state-error" );
 
-
-                    <c:url value="/addbook" var="targeturl"/>
-                    $.get("${targeturl}", {username:"${userName}", plankID: plankid, ISBN: ISBN, Title: Title, Author: Author}, function(data) {
-                        console.log(data[0]);
-
-                        var width = data[0];
-                        var bookheight = data[1];
-                        var plankheight = data[2];
-                        var imageurl = data[3];
-
-                        var string = '<li class="book" style="width:'+ width +'"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>'
-                        console.log(string);
-
-                        var jquerystring = '#' + plankid + ' .booklist';
-                        console.log(jquerystring);
-
-                        $(jquerystring).append(string);
-
-
-
-                    })
-
-
-
                 }
             });
-
             form = dialog.find( "form" ).on( "submit", function( event ) {
                 event.preventDefault();
-                addBook();
+                checkBook();
             });
-
             $('.addbutton').click(function() {
                 plankid = $(this).data("plankid");
-
                 dialog.dialog( "open" );
-
             })
         });
-
-
-
-
-
         $(document).ready(function() {
-            $('#addplankbutton').click(function() {
-                <c:url value="/addplank" var="targeturl"/>
-                $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
-                    var string = '<li class="books" id="'+data+'" style="height: 300"><ul class="booklist"></ul></li><li class="plank"></li>'
-                    $('#planks').append(string);
-                })
-            })
-
-
-
-
-        }
-
-
-
+                    $('#addplankbutton').click(function() {
+                        <c:url value="/addplank" var="targeturl"/>
+                        $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
+                            var string = '<li class="books" id="'+data+'" style="height: 300"><ul class="booklist"></ul></li><li class="plank"></li>'
+                            $('#planks').append(string);
+                        })
+                    })
+                }
         );
-
-
-
-
     </script>
-
-
-
-
-
 </article>
 </body>
 </html>
-

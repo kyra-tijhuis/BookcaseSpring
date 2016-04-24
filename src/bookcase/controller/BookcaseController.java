@@ -2,14 +2,10 @@ package bookcase.controller;
 
 import bookcase.forms.LoginForm;
 import bookcase.forms.SearchForm;
-import database.dao.BookDAO;
-import database.dao.BookDetailsDAO;
-import database.dao.BookcaseDAO;
+import database.dao.*;
 import database.goodreadsAPI.GoodreadsDAO;
-import database.dao.PlankDAO;
 import database.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Student on 19-4-2016.
@@ -28,25 +23,17 @@ import java.util.ArrayList;
 
 @Controller
 public class BookcaseController {
-    @Autowired
-    private BookDetailsDAO bookDetailsDAO;
 
     @Autowired
-    private BookcaseDAO bookcaseDAO;
-
-    @Autowired
-    private PlankDAO plankDAO;
-
-    @Autowired
-    private BookDAO bookDAO;
+    private DataOperations dao;
 
     @RequestMapping(value="/bookcase")
     public String bookcases(HttpServletRequest request, HttpServletResponse resp, @ModelAttribute("error") String error, Model model) {
         ControllerFunctions.prepareLoginBar(request, error);
         try {
             int ID = Integer.parseInt(request.getParameter("id"));
-            Bookcase b = bookcaseDAO.getBookcase(ID);
-            String username = bookcaseDAO.getUserFromBookcase(b).getUserName();
+            Bookcase b = dao.getBookcase(ID);
+            String username = dao.userNameFromBookcase(b);
             if (b!=null) { // TODO check if bookcase exists in DB and import it
 
                 int height = -10;
@@ -56,10 +43,8 @@ public class BookcaseController {
 
                 model.addAttribute("bookcaseheight", height);
                 model.addAttribute("bookcase", b);
-                
                 model.addAttribute("goodreadsDAO", new GoodreadsDAO());
                 model.addAttribute("userName", username);
-
 
                 return "Bookcase";
             } else {
@@ -74,13 +59,14 @@ public class BookcaseController {
     @RequestMapping(value="/addplank")
     public @ResponseBody String addplank(String username, int bookcaseID, HttpSession session, HttpServletResponse resp) {
         if (session.getAttribute("user").equals(username)) {
-            Plank plank = plankDAO.createPlank(300);
-            Bookcase bookcase = bookcaseDAO.getBookcase(bookcaseID);
-            bookcase.getPlanks().add(plank);
-            bookcaseDAO.updateBookcase(bookcase);
-            return "" + plank.getPlankID();
+//            Plank plank = plankDAO.createPlank(300);
+//            Bookcase bookcase = bookcaseDAO.getBookcase(bookcaseID);
+//            bookcase.getPlanks().add(plank);
+//            bookcaseDAO.updateBookcase(bookcase);
+//            return "" + plank.getPlankID();
+            return dao.addNewPlankToBookcase(bookcaseID, 300);
         }
-        try {
+        try { // TODO in else
             resp.sendError(401);
         } catch (IOException io) {
 
@@ -89,23 +75,15 @@ public class BookcaseController {
     }
 
     @RequestMapping(value="/addbook")
-    public @ResponseBody String[] addbook(String username, String plankID, String ISBN, String Title, String Author, HttpSession session, HttpServletResponse resp) {
+    public @ResponseBody String[] addbook(String username, String plankID, String isbn, String title, String author, HttpSession session, HttpServletResponse resp) {
         String[] returnstring = new String[4];
 
-        System.out.println(plankID + " " + ISBN + " " + Title + " " + Author);
+        System.out.println("addBook: " + plankID + " " + isbn + " " + title + " " + author);
 
 
-
-
-
-        Book b = bookDAO.createBook(ISBN, Title, Author, 200, 150, 20);
-        Plank p = plankDAO.getPlank(Integer.parseInt(plankID));
-        BookDetails details = bookDetailsDAO.createBookDetails(b, Orientation.COVER, p, plankDAO.firstEmptyOnPlank(p.getPlankID()));
-        p.getBooks().add(details);
-        plankDAO.updatePlank(p);
-        GoodreadsDAO goodreadsDAO = new GoodreadsDAO();
-
-
+        Book b = dao.createBook(isbn, title, author);
+        Plank p = dao.getPlank(plankID);
+        dao.createBookDetails(b, p);
 
         String width = "" + b.getWidth();
         String bookheight = "" + b.getHeight();
@@ -114,16 +92,15 @@ public class BookcaseController {
         returnstring[0]= width;
         returnstring[1]= bookheight;
         returnstring[2]= plankheight;
-        returnstring[3]= goodreadsDAO.getImage(ISBN);
+        returnstring[3]= new GoodreadsDAO().getImage(isbn);
 
 
         if (session.getAttribute("user") != null && session.getAttribute("user").equals(username)) {
-
             return returnstring;
         } else {
-            System.out.println("hallo");
+            System.out.println("hallo"); // TODO iets nuttigs
         }
-        try {
+        try { // TODO verplaatsen?
             resp.sendError(401);
         } catch (IOException io) {
 

@@ -24,8 +24,6 @@
 </head>
 <body>
 
-
-
     <article id="mainscreen">
         <h1>Search bookcases</h1>
         <c:url value="/search" var="x"/>

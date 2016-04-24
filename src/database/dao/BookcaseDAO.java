@@ -18,7 +18,17 @@ public class BookcaseDAO {
 
     @Transactional
     public Bookcase getBookcase(int bookcaseID) {
-        return em.find(Bookcase.class, bookcaseID);
+//        return em.find(Bookcase.class, bookcaseID);
+
+        Bookcase bookcase = null;
+        Query query = em.createQuery("from Bookcase b where bookcaseID= :bID");
+        query.setParameter("bID", bookcaseID);
+        try {
+            bookcase = (Bookcase) query.getSingleResult();
+        } catch (NoResultException e) {
+            // bookcase stays null
+        }
+        return bookcase;
     }
 
     @Transactional

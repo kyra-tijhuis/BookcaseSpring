@@ -22,8 +22,8 @@ public class Main {
 
         Book book = new Book();
         book.setIsbn("1234567890124");
-		book.setAuthor("Author 2");
-        book.setBookTitle("Title 2");
+		book.setAuthor("author 2");
+        book.setBookTitle("title 2");
         book.setWidth(150);
         book.setHeight(200);
         book.setThickness(20);

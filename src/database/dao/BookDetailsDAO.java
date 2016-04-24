@@ -23,22 +23,14 @@ public class BookDetailsDAO {
         return em.find(BookDetails.class, bookDetailsID);
     }
 
+    @Transactional
     public BookDetails createBookDetails(Book book, Orientation orientation, Plank plank, int bookIndex) {
         BookDetails details = new BookDetails();
         details.setBook(book);
         details.setOrientation(orientation);
         details.setBookIndex(bookIndex);
-        plank.getBooks().add(details);
 
-        EntityTransaction t = em.getTransaction();
-        t.begin();
         em.persist(details);
-        t.commit();
-        details.setPlank(plank);
-        t.begin();
-        em.merge(plank);
-        t.commit();
-        em.close();
 
         return details;
     }

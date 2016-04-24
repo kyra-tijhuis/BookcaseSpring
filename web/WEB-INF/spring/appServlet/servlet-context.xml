@@ -32,6 +32,7 @@
     <beans:bean class="database.dao.PlankDAO"></beans:bean>
     <beans:bean class="database.dao.BookDAO"></beans:bean>
     <beans:bean class="database.dao.BookDetailsDAO"></beans:bean>
+	<beans:bean class="database.dao.DataOperations"></beans:bean>
 
 	<beans:bean id="myEmf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
 		<beans:property name="persistenceUnitName" value="bookcase" />
