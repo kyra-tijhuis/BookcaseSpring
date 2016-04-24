@@ -36,32 +36,18 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    private UserDAO userDAO;
-
-    @Autowired
-    private BookcaseDAO bookcaseDAO;
-
-    @Autowired
-    private PlankDAO plankDAO;
-
-    @Autowired
     private DataOperations dao;
 
     @RequestMapping(value="/index", method=RequestMethod.GET)
     public String index(HttpServletRequest request, @ModelAttribute("error") String error) {
-
         ControllerFunctions.prepareLoginBar(request, error);
-
         return "MainScreen";
     }
 
-
-
-
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(LoginForm login, HttpSession session, RedirectAttributes redirectAttributes){
-        if (userDAO.getUser(login.getUsername()) != null) {
-            if (userDAO.correctPassword(login.getUsername(), login.getPassword())) {
+        if (dao.getUser(login.getUsername()) != null) {
+            if (dao.correctPassword(login.getUsername(), login.getPassword())) {
                 session.setAttribute("user", login.getUsername());
             } else {
                 redirectAttributes.addFlashAttribute("error", "password");
@@ -99,61 +85,48 @@ public class MainController {
         }
 
         if(!result.hasErrors()) {
-            User user = userDAO.createUser(userForm.getUsername(), userForm.getPassword());
+            User user = dao.createUser(userForm.getUsername(), userForm.getPassword());
             if (user == null) {
                 result.addError(new FieldError("userForm", "username", "Username taken!"));
             }
         }
 
-
-
         if (result.hasErrors()) {
             return "Signup";
         }
-
 
         session.setAttribute("user", userForm.getUsername());
 
         return "redirect:/index";
     }
 
-
-
-
-
     @RequestMapping(value="/search")
     public String searchGet(HttpServletRequest request, Model model, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
         ControllerFunctions.prepareLoginBar(request, error);
-        List<Bookcase> bookcaseList = bookcaseDAO.getAllBookcases();
+        List<Bookcase> bookcaseList = dao.getAllBookcases();
 
         model.addAttribute("searchlist", bookcaseList);
-        model.addAttribute("bookcaseDAO", bookcaseDAO);
+        model.addAttribute("dao", dao);
 
         return "SearchResults";
     }
-
 
     @RequestMapping("/user/*")
     public String user(HttpServletRequest request, Model model, @ModelAttribute("error") String error, @ModelAttribute("AddCaseForm") @Valid AddCaseForm addCaseForm, BindingResult result) {
         ControllerFunctions.prepareLoginBar(request, error);
 
         String url = request.getRequestURL().toString();
-        User activeUser = userDAO.getUser(url.substring(url.lastIndexOf("/")+1).toString());
+        User activeUser = dao.getUser(url.substring(url.lastIndexOf("/")+1).toString());
 
         if (result.hasErrors()) {
             System.out.println(result.getFieldError("name"));
         }
 
-
         if (activeUser != null) {
             request.setAttribute("userName", activeUser.getUserName());
             request.setAttribute("searchlist", activeUser.getBookcases());
-            
-
-
             return "User";
         } else {
-
             return "InvalidUser";
         }
 
@@ -170,31 +143,13 @@ public class MainController {
                     }
                 }
                 if (!result.hasErrors()) {
-                    Bookcase bookcase = bookcaseDAO.createBookcase(inputform.getName(), 1000);
-                    user.getBookcases().add(bookcase);
-                    userDAO.updateUser(user);
-                    Plank plank = plankDAO.createPlank(300);
-                    bookcase.getPlanks().add(plank);
-                    bookcaseDAO.updateBookcase(bookcase);
+                    int bookcaseID = dao.addNewBookcaseToUser(user, inputform.getName());
+                    dao.addNewPlankToBookcase(bookcaseID, 300);
                 }
             }
         }
         return "redirect:/user/" + inputform.getUser();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @ModelAttribute("LoginForm")
     public LoginForm createLoginForm() {

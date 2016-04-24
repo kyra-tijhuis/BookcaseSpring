@@ -55,7 +55,7 @@
         <ul class="scrolllist">
             <c:forEach var="item" items="${searchlist}">
                 <c:url value="/bookcase?id=${item.getBookcaseID()}" var="bookcaseRef"/>
-                <li class="scrollitem"><a href="${bookcaseRef}"><table class="contenttable"><tr><td><img src="resources/bookcase.png"/></td><td><h5>${item.getBookcaseName()}</h5><h6>user: ${bookcaseDAO.getUserFromBookcase(item).getUserName()}</h6></td></tr></table></a></li>
+                <li class="scrollitem"><a href="${bookcaseRef}"><table class="contenttable"><tr><td><img src="resources/bookcase.png"/></td><td><h5>${item.getBookcaseName()}</h5><h6>user: ${dao.userNameFromBookcase(item)}</h6></td></tr></table></a></li>
             </c:forEach>
         </ul>
         <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>

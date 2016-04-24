@@ -17,7 +17,7 @@ public class PlankDAO {
 //    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
     @Transactional
-    public Plank getPlank(int plankID) {
+    Plank getPlank(int plankID) {
         return em.find(Plank.class, plankID);
     }
 
@@ -26,7 +26,7 @@ public class PlankDAO {
      * @param plankID
      * @return -1 if plank does not exist, otherwise the first empty index of the plank
      */
-    public int firstEmptyOnPlank(int plankID) {
+    int firstEmptyOnPlank(int plankID) {
         Plank plank = getPlank(plankID);
         int result = -1;
 
@@ -37,7 +37,7 @@ public class PlankDAO {
     }
 
     @Transactional
-    public Plank createPlank(int height) {
+    Plank createPlank(int height) {
         Plank result = new Plank();
         result.setHeight(height);
         result.setBooks(new ArrayList<>());
@@ -52,7 +52,7 @@ public class PlankDAO {
      * @return updated bookcase
      */
     @Transactional
-    public Plank updatePlank(Plank plank) {
+    Plank updatePlank(Plank plank) {
         Plank result = em.merge(plank);
         return result;
     }

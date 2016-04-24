@@ -4,6 +4,8 @@ import database.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Kyra on 24/04/2016.
  */
@@ -25,12 +27,8 @@ public class DataOperations {
     @Autowired
     private BookDetailsDAO bookDetailsDAO;
 
-    public void createUser() {
-
-    }
-
-    public Bookcase createBookcase(String bookcaseName) {
-        return bookcaseDAO.createBookcase(bookcaseName, 800);
+    public User createUser(String userName, String password) {
+        return userDAO.createUser(userName, password);
     }
 
     public Plank createPlank(int plankHeight) {
@@ -75,11 +73,13 @@ public class DataOperations {
         return plankDAO.getPlank(ID);
     }
 
-    /**
-     *
-     * @param bookcaseID
-     * @return plankID of created plank as String
-     */
+    public int addNewBookcaseToUser(User user, String bookcaseName) {
+        Bookcase bookcase = bookcaseDAO.createBookcase(bookcaseName, 1000);
+        user.getBookcases().add(bookcase);
+        userDAO.updateUser(user);
+        return bookcase.getBookcaseID();
+    }
+
     public String addNewPlankToBookcase(int bookcaseID, int plankHeight) {
         Plank plank = createPlank(plankHeight);
         Bookcase bookcase = getBookcase(bookcaseID);
@@ -88,13 +88,15 @@ public class DataOperations {
         return "" + plank.getPlankID();
     }
 
-
-    public void addBookToPlank() {
-
-    }
-
     public String userNameFromBookcase(Bookcase bookcase) {
         return bookcaseDAO.getUserFromBookcase(bookcase).getUserName();
     }
 
+    public List<Bookcase> getAllBookcases() {
+        return bookcaseDAO.getAllBookcases();
+    }
+
+    public boolean correctPassword(String userName, String password) {
+        return userDAO.correctPassword(userName, password);
+    }
 }

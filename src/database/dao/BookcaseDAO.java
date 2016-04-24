@@ -17,7 +17,7 @@ public class BookcaseDAO {
     private EntityManager em;
 
     @Transactional
-    public Bookcase getBookcase(int bookcaseID) {
+    Bookcase getBookcase(int bookcaseID) {
 //        return em.find(Bookcase.class, bookcaseID);
 
         Bookcase bookcase = null;
@@ -32,7 +32,7 @@ public class BookcaseDAO {
     }
 
     @Transactional
-    public Bookcase createBookcase(String name, int width) {
+    Bookcase createBookcase(String name, int width) {
         Bookcase result = new Bookcase();
         result.setBookcaseName(name);
         result.setWidth(width);
@@ -48,13 +48,13 @@ public class BookcaseDAO {
      * @return updated bookcase
      */
     @Transactional
-    public Bookcase updateBookcase(Bookcase bookcase) {
+    Bookcase updateBookcase(Bookcase bookcase) {
         Bookcase result = em.merge(bookcase);
         return result;
     }
 
     @Transactional
-    public User getUserFromBookcase(Bookcase bookcase) {
+    User getUserFromBookcase(Bookcase bookcase) {
         User user = null;
         Query query = em.createQuery("from User u where :bc member of u.bookcases");
         query.setParameter("bc", bookcase);
@@ -67,7 +67,7 @@ public class BookcaseDAO {
     }
 
     @Transactional
-    public List<Bookcase> getAllBookcases() {
+    List<Bookcase> getAllBookcases() {
         return em.createQuery("from Bookcase").getResultList();
     }
 

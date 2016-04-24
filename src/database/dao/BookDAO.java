@@ -17,7 +17,7 @@ public class BookDAO {
 //    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
     @Transactional
-    public Book getBook(String isbn){
+    Book getBook(String isbn){
         return em.find(Book.class, isbn);
     }
 
@@ -33,7 +33,7 @@ public class BookDAO {
      * @return a Book, newly created or retrieved from the database.
      */
     @Transactional
-    public Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness) {
+    Book createBook(String isbn, String bookTitle, String author, int height, int width, int thickness) {
         Book result = new Book();
         result.setIsbn(isbn);
         result.setBookTitle(bookTitle);
@@ -58,7 +58,7 @@ public class BookDAO {
     }
 
     @Transactional
-    public List<Book> searchBooks(String searchTerm) {
+    List<Book> searchBooks(String searchTerm) {
         Query query = em.createQuery(
                 "from Book b where b.bookTitle like :title or b.author like :author");
         query.setParameter("title", "%" + searchTerm + "%");
@@ -67,7 +67,7 @@ public class BookDAO {
     }
 
     @Transactional
-    public List<Book> searchExactBooks(String searchTerm) {
+    List<Book> searchExactBooks(String searchTerm) {
         Query query = em.createQuery(
                 "from Book b where b.bookTitle like :title or b.author like :author");
         query.setParameter("title", searchTerm);

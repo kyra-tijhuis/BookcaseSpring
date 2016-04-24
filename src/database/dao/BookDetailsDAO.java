@@ -24,7 +24,7 @@ public class BookDetailsDAO {
     }
 
     @Transactional
-    public BookDetails createBookDetails(Book book, Orientation orientation, Plank plank, int bookIndex) {
+    BookDetails createBookDetails(Book book, Orientation orientation, Plank plank, int bookIndex) {
         BookDetails details = new BookDetails();
         details.setBook(book);
         details.setOrientation(orientation);
