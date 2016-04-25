@@ -85,6 +85,7 @@ public class DataOperations {
         Bookcase bookcase = getBookcase(bookcaseID);
         bookcase.getPlanks().add(plank);
         bookcaseDAO.updateBookcase(bookcase);
+        System.out.println(plank.getPlankID());
         return "" + plank.getPlankID();
     }
 

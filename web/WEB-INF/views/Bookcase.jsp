@@ -52,8 +52,6 @@
     </form>
 </div>
 
-
-
 <article id="mainscreen">
     <h1>${bookcase.bookcaseName}</h1>
     <h4>A bookcase by ${userName}</h4>

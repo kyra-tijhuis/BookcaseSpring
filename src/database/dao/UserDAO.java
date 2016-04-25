@@ -20,7 +20,7 @@ public class UserDAO {
     private EntityManager em;
 
     @Transactional
-    User getUser(String userName) {
+    public User getUser(String userName) {
         User user = null;
         Query query = em.createQuery("from User u where userName= :username");
         query.setParameter("username", userName);
@@ -39,7 +39,7 @@ public class UserDAO {
      * @return the newly created user, or null if the user already existed.
      */
     @Transactional
-    User createUser(String userName, String password) {
+    public User createUser(String userName, String password) {
         User existingUser = getUser(userName);
 
         if (existingUser==null) {
@@ -62,7 +62,7 @@ public class UserDAO {
      * @return updated user
      */
     @Transactional
-    User updateUser(User user) {
+    public User updateUser(User user) {
         User result = em.merge(user);
         return result;
     }
@@ -103,7 +103,7 @@ public class UserDAO {
         return getUser(userName).getPasswordHash();
     }
 
-    boolean correctPassword(String userName, String password) {
+    public boolean correctPassword(String userName, String password) {
         return hashPassword(userName, password).equals(getHash(userName));
     }
 
