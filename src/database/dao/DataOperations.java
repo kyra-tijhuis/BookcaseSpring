@@ -3,6 +3,7 @@ package database.dao;
 import database.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -73,6 +74,14 @@ public class DataOperations {
         return plankDAO.getPlank(ID);
     }
 
+    @Transactional
+    public void removeBookDetails(String bookDetailsID) {
+        int detailsID = Integer.parseInt(bookDetailsID);
+        BookDetails details = bookDetailsDAO.getBookDetails(detailsID);
+        bookDetailsDAO.deleteBookDetails(details);
+        System.out.println(":(");
+    }
+
     public int addNewBookcaseToUser(User user, String bookcaseName) {
         Bookcase bookcase = bookcaseDAO.createBookcase(bookcaseName, 1000);
         user.getBookcases().add(bookcase);
@@ -85,7 +94,6 @@ public class DataOperations {
         Bookcase bookcase = getBookcase(bookcaseID);
         bookcase.getPlanks().add(plank);
         bookcaseDAO.updateBookcase(bookcase);
-        System.out.println(plank.getPlankID());
         return "" + plank.getPlankID();
     }
 

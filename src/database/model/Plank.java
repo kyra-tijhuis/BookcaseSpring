@@ -34,7 +34,7 @@ public class Plank {
         this.height = height;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = BookDetails.class)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE}, orphanRemoval = true, targetEntity = BookDetails.class)
     public List<BookDetails> getBooks() {
         return books;
     }

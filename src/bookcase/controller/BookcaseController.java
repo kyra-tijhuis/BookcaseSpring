@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,15 +57,10 @@ public class BookcaseController {
     }
 
 
-    @RequestMapping(value="/addplank")
-    public @ResponseBody String addplank(String username, int bookcaseID, HttpSession session, HttpServletResponse resp) {
-        if (session.getAttribute("user").equals(username)) {
-//            Plank plank = plankDAO.createPlank(300);
-//            Bookcase bookcase = bookcaseDAO.getBookcase(bookcaseID);
-//            bookcase.getPlanks().add(plank);
-//            bookcaseDAO.updateBookcase(bookcase);
-//            return "" + plank.getPlankID();
-            return dao.addNewPlankToBookcase(bookcaseID, 300);
+    @RequestMapping(value="/addplank", method=RequestMethod.POST)
+    public @ResponseBody String addplank(HttpServletRequest request, HttpSession session, HttpServletResponse resp) {
+        if (session.getAttribute("user") != null && session.getAttribute("user").equals(request.getParameter("username"))) {
+            return dao.addNewPlankToBookcase(Integer.parseInt(request.getParameter("bookcaseID")), 300);
         }
         try { // TODO in else
             resp.sendError(401);
@@ -76,39 +72,52 @@ public class BookcaseController {
 
     @RequestMapping(value="/addbook")
     public @ResponseBody String[] addbook(String username, String plankID, String isbn, String title, String author, HttpSession session, HttpServletResponse resp) {
-        String[] returnstring = new String[4];
 
-        System.out.println("addBook: " + plankID + " " + isbn + " " + title + " " + author);
-
-
-        Book b = dao.createBook(isbn, title, author);
-        Plank p = dao.getPlank(plankID);
-        dao.createBookDetails(b, p);
-
-        String width = "" + b.getWidth();
-        String bookheight = "" + b.getHeight();
-        String plankheight = "" + p.getHeight();
-
-        returnstring[0]= width;
-        returnstring[1]= bookheight;
-        returnstring[2]= plankheight;
-        returnstring[3]= new GoodreadsDAO().getImage(isbn);
 
 
         if (session.getAttribute("user") != null && session.getAttribute("user").equals(username)) {
+            String[] returnstring = new String[5];
+
+            Book b = dao.createBook(isbn, title, author);
+            Plank p = dao.getPlank(plankID);
+            BookDetails details = dao.createBookDetails(b, p);
+
+            String width = "" + b.getWidth();
+            String bookheight = "" + b.getHeight();
+            String plankheight = "" + p.getHeight();
+
+            returnstring[0]= width;
+            returnstring[1]= bookheight;
+            returnstring[2]= plankheight;
+            returnstring[3]= new GoodreadsDAO().getImage(isbn);
+            returnstring[4] = "" + details.getBookDetailsID();
+
             return returnstring;
         } else {
-            System.out.println("hallo"); // TODO iets nuttigs
+            try {
+                resp.sendError(401);
+            } catch (IOException io) {
+            }
+            return null;
         }
-        try { // TODO verplaatsen?
-            resp.sendError(401);
-        } catch (IOException io) {
-
-        }
-        return null;
     }
 
+    @RequestMapping(value="/removebook")
+    public @ResponseBody String removeBook(String username, String detailsID, HttpSession session, HttpServletResponse resp) {
+        if (session.getAttribute("user") != null && session.getAttribute("user").equals(username)) {
 
+            dao.removeBookDetails(detailsID);
+            return detailsID;
+        } else {
+            try {
+                resp.sendError(401);
+            } catch (IOException io) {
+
+            }
+            return null;
+        }
+
+    }
 
 
     @ModelAttribute("SearchForm")

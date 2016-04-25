@@ -43,7 +43,7 @@ public class Bookcase {
         this.width = width;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Plank.class)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE}, orphanRemoval = true, targetEntity = Plank.class)
     public List<Plank> getPlanks() {
         return planks;
     }

@@ -1,9 +1,11 @@
 package database.model;
 
 import com.sun.istack.internal.NotNull;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 
 /**
  * Created by Kyra on 15/04/2016.
@@ -28,7 +30,8 @@ public class BookDetails {
     }
 
     @NotNull
-    @OneToOne(cascade = {CascadeType.REMOVE}, orphanRemoval = true, targetEntity = Book.class)
+    @OneToOne(orphanRemoval = true, targetEntity = Book.class)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     public Book getBook() {
         return book;
     }
@@ -54,7 +57,8 @@ public class BookDetails {
         this.bookIndex = bookIndex;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Plank.class,cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Plank.class)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     public Plank getPlank() {
         return plank;
     }

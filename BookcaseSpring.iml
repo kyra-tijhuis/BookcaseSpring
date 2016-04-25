@@ -48,5 +48,6 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="jquery-1.10.2" level="application" />
+    <orderEntry type="library" name="spring-security-taglibs-4.0.1.RELEASE" level="project" />
   </component>
 </module>

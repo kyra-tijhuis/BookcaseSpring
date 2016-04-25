@@ -53,7 +53,7 @@ public class User {
         this.salt = salt;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true, targetEntity = Bookcase.class)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE}, orphanRemoval = true, targetEntity = Bookcase.class)
     public List<Bookcase> getBookcases() {
         return bookcases;
     }

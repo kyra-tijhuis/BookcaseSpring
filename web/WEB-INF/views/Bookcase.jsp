@@ -7,15 +7,36 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
-    <title>BookCase</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/general.css" />/>
     <link rel="stylesheet" type="text/css" href=<c:url value="/resources/bookcase.css" />/>
+
+
+    <title>BookCase</title>
+
+    <sec:csrfMetaTags />
+    <script type="text/javascript" language="javascript">
+        // configureer JQuery om csrf-token mee te sturen
+        var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+        var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+        var csrfToken = $("meta[name='_csrf']").attr("content");
+        $(function () {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+        });
+    </script>
+
+
 
     <jsp:include page="LoginBar.jsp" />
     <style>
@@ -33,6 +54,7 @@
 
 </head>
 <body>
+
 
 <div id="dialog-form" title="Add book">
     <p class="validateTips">All form fields are required.</p>
@@ -67,7 +89,7 @@
                 <li class="books" id="${plank.plankID}" style="height: ${plank.height}">
                     <ul class="booklist">
                         <c:forEach var="book" items="${plank.books}">
-                            <li class="book" style="width: ${book.book.width}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
+                            <li class="book" style="width: ${book.book.width}" data-detailsid="${book.bookDetailsID}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
                         </c:forEach>
                     </ul>
                 </li>
@@ -150,15 +172,14 @@
             function addBook() {
                 <c:url value="/addbook" var="targeturl"/>
                 $.get("${targeturl}", {username:"${userName}", plankID: plankid, isbn: ISBN, title: Title, author: Author}, function(data) {
-                    console.log(data[0]);
                     var width = data[0];
                     var bookheight = data[1];
                     var plankheight = data[2];
                     var imageurl = data[3];
-                    var string = '<li class="book" style="width:'+ width +'"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>'
-                    console.log(string);
+                    var detailsID = data[4];
+
+                    var string = '<li class="book" style="width:'+ width +'" data-detailsid="' + detailsID + '"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>';
                     var jquerystring = '#' + plankid + ' .booklist';
-                    console.log(jquerystring);
                     $(jquerystring).append(string);
                 })
             }
@@ -192,11 +213,24 @@
         $(document).ready(function() {
                     $('#addplankbutton').click(function() {
                         <c:url value="/addplank" var="targeturl"/>
-                        $.get("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
-                            var string = '<li class="books" id="'+data+'" style="height: 300"><ul class="booklist"></ul></li><li class="plank"></li>'
-                            $('#planks').append(string);
+                        $.post("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
+                            var plankstring = '<li class="books" id="'+data+'" style="height: 300px"><ul class="booklist"></ul></li><li class="plank"></li>';
+                            $('#planks').append(plankstring);
+
+                            var buttonstring = '<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '">Add book to this plank</button></li>';
+                            $('#buttonlist').append(buttonstring);
+
                         })
                     })
+
+                    <%--$('.book').click(function() {--%>
+                        <%--<c:url value="/removebook" var="targeturl"/>--%>
+                        <%--var detailsID = $(this).data("detailsid");--%>
+
+                        <%--$.get("${targeturl}", {username:"${userName}", detailsID: detailsID}, function(data) {--%>
+                            <%--console.log("test")--%>
+                        <%--})--%>
+                    <%--})--%>
                 }
         );
     </script>

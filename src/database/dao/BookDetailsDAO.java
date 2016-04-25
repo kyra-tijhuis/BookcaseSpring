@@ -45,4 +45,9 @@ public class BookDetailsDAO {
         BookDetails result = em.merge(bookDetails);
         return result;
     }
+
+    @Transactional void deleteBookDetails(BookDetails bookDetails) {
+        em.remove(bookDetails);
+        em.close();
+    }
 }
