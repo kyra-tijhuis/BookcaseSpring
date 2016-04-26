@@ -98,15 +98,18 @@
         </ul></td>
         <td id="bookcaseright"></td>
     </tr></table>
-    <table id="buttontable">
-        <ul id="buttonlist">
-            <c:forEach var="plank" items="${bookcase.planks}">
-                <li class="buttons"  style="height: ${plank.height + 15}">
-                    <button class="addbutton" data-plankid="${plank.plankID}">Add book to this plank</button>
-                </li>
-            </c:forEach>
-        </ul>
-    </table>
+    <c:if test="${user == userName}">
+        <table id="buttontable">
+            <ul id="buttonlist">
+                <c:forEach var="plank" items="${bookcase.planks}">
+                    <li class="buttons"  style="height: ${plank.height + 15}">
+                        <button class="addbutton" data-plankid="${plank.plankID}">Add book to this plank</button>
+                    </li>
+                </c:forEach>
+            </ul>
+        </table>
+    </c:if>
+
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
 
 

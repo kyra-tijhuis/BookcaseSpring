@@ -56,7 +56,6 @@ public class BookcaseController {
         }
     }
 
-
     @RequestMapping(value="/addplank", method=RequestMethod.POST)
     public @ResponseBody String addplank(HttpServletRequest request, HttpSession session, HttpServletResponse resp) {
         if (session.getAttribute("user") != null && session.getAttribute("user").equals(request.getParameter("username"))) {
@@ -118,6 +117,11 @@ public class BookcaseController {
         }
 
     }
+
+
+
+
+
 
 
     @ModelAttribute("SearchForm")
