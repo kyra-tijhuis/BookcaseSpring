@@ -40,8 +40,8 @@
 
     <jsp:include page="LoginBar.jsp" />
     <style>
-        body { font-size: 62.5%; }
-        label, input { display:block; }
+        /*body { font-size: 62.5%; }*/
+        .formlabel, .forminput { display:block; }
         input.text { margin-bottom:12px; width:95%; padding: .4em; }
         fieldset { padding:0; border:0; margin-top:25px; }
         h1 { font-size: 1.2em; margin: .6em 0; }
@@ -61,12 +61,12 @@
 
     <form>
         <fieldset>
-            <label for="isbn">ISBN</label>
-            <input type="text" name="isbn" id="isbn" placeholder="1234567890123" class="text ui-widget-content ui-corner-all">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="Book title" class="text ui-widget-content ui-corner-all">
-            <label for="author">Author</label>
-            <input type="text" name="author" id="author" placeholder="A. Author" class="text ui-widget-content ui-corner-all">
+            <label class="formlabel" for="isbn">ISBN</label>
+            <input class="forminput" type="text" name="isbn" id="isbn" placeholder="1234567890123" class="text ui-widget-content ui-corner-all">
+            <label class="formlabel" for="title">Title</label>
+            <input class="forminput" type="text" name="title" id="title" placeholder="Book title" class="text ui-widget-content ui-corner-all">
+            <label class="formlabel" for="author">Author</label>
+            <input class="forminput" type="text" name="author" id="author" placeholder="A. Author" class="text ui-widget-content ui-corner-all">
 
             <!-- Allow form submission with keyboard without duplicating the dialog button -->
             <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -180,6 +180,7 @@
 
                     var string = '<li class="book" style="width:'+ width +'" data-detailsid="' + detailsID + '"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>';
                     var jquerystring = '#' + plankid + ' .booklist';
+
                     $(jquerystring).append(string);
                 })
             }

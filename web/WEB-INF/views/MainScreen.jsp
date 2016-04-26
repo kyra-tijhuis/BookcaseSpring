@@ -20,7 +20,7 @@
 </head>
 <body>
     <article id="mainscreen">
-        <h1>Kyra and Jelle's wild bookcase mania!</h1>
+        <h1>Face the Books!</h1>
         <p style="text-align: center; text-decoration: underline">We don't care about front pages, we care about books!</p><br>
 
         <p>

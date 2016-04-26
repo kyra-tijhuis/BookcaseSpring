@@ -22,11 +22,8 @@
         <c:if test="${empty user}">
             <c:url value="/login" var="x"/>
             <form:form class="form" action="${x}"  method="post" modelAttribute="LoginForm">
-
                 <form:input path="username" placeholder = "${unPlaceholder}"/>
-
                 <form:password path="password" placeholder = "${pwPlaceholder}"/>
-
                 <form:input path="url" type="hidden" value="${address}" />
                 <button type="submit">Login</button>
             </form:form>
