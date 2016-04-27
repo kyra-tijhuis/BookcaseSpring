@@ -10,7 +10,6 @@ to fix add-book-button-position:
 
 #buttonlist {
     list-style-type: none;
-    top: 100px;
     display: inline-block;
     float: right;
     margin-right: 20px;
