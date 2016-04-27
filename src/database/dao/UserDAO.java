@@ -63,8 +63,7 @@ public class UserDAO {
      */
     @Transactional
     public User updateUser(User user) {
-        User result = em.merge(user);
-        return result;
+        return em.merge(user);
     }
 
     private String generateSalt() {

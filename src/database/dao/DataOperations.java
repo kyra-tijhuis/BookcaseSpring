@@ -7,9 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Kyra on 24/04/2016.
- */
 @Repository
 public class DataOperations {
 
@@ -74,7 +71,6 @@ public class DataOperations {
         return plankDAO.getPlank(ID);
     }
 
-    @Transactional
     public void removeBookDetails(String bookDetailsID) {
         int detailsID = Integer.parseInt(bookDetailsID);
         BookDetails details = bookDetailsDAO.getBookDetails(detailsID);

@@ -16,7 +16,6 @@ import javax.persistence.*;
 public class BookDetailsDAO {
     @PersistenceContext
     private EntityManager em;
-//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("bookcases");
 
     @Transactional
     public BookDetails getBookDetails(int bookDetailsID) {
