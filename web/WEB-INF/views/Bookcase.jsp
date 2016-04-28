@@ -87,7 +87,7 @@
                 <li class="books" id="${plank.plankID}" style="height: ${plank.height}">
                     <ul class="booklist">
                         <c:forEach var="book" items="${plank.books}">
-                            <li class="book" style="width: ${book.book.width}" data-detailsid="${book.bookDetailsID}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
+                            <li class="book" style="width: 15%" data-detailsid="${book.bookDetailsID}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
                         </c:forEach>
                     </ul>
                 </li>
@@ -100,7 +100,7 @@
         <ul id="buttonlist">
             <c:forEach var="plank" items="${bookcase.planks}">
                 <li class="buttons"  style="height: ${plank.height + 15}">
-                    <button class="addbutton" data-plankid="${plank.plankID}"><img style="width: 50px;" src="resources/addbookbutton.jpg"></button>
+                    <button class="addbutton" data-plankid="${plank.plankID}"><img style="width: 50px;" src="/resources/addbookbutton.jpg"></button>
                 </li>
             </c:forEach>
         </ul>
@@ -181,7 +181,7 @@
                     var imageurl = data[3];
                     var detailsID = data[4];
 
-                    var string = '<li class="book" style="width:'+ width +'" data-detailsid="' + detailsID + '"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>';
+                    var string = '<li class="book" style="width: 15%" data-detailsid="' + detailsID + '"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>';
                     var jquerystring = '#' + plankid + ' .booklist';
 
                     $(jquerystring).append(string);
@@ -220,7 +220,7 @@
                     var plankstring = '<li class="books" id="'+data+'" style="height: 300px"><ul class="booklist"></ul></li><li class="plank"></li>';
                     $('#planks').append(plankstring);
 
-                    var new_li = $('<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '"><img style="width: 50px;" src="resources/addbookbutton.jpg"></button></li>');
+                    var new_li = $('<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '"><img style="width: 50px;" src="/resources/addbookbutton.jpg"></button></li>');
                     $('#buttonlist').append(new_li);
                     $('#buttonlist .addbutton:last-of-type').click(function() {
                         plankid = $(this).data("plankid");
