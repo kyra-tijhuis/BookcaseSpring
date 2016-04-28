@@ -43,7 +43,7 @@
         </ul>
         <ul class="scrolllist">
             <c:forEach var="item" items="${searchlist}">
-                <c:url value="/bookcase?id=${item.bookcaseID}" var="x"/>
+                <c:url value="/bookcase/${item.bookcaseID}" var="x"/>
                 <li class="scrollitem"><a href="${x}"><table class="contenttable"><tr><td><img src="../resources/bookcase.png"/></td><td><h5>${item.getBookcaseName()}</h5><h6>user: ${userName}</h6></td></tr></table></a></li>
             </c:forEach>
         </ul>

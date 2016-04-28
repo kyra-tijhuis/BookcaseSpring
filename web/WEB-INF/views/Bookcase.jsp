@@ -87,7 +87,7 @@
                 <li class="books" id="${plank.plankID}" style="height: ${plank.height}">
                     <ul class="booklist">
                         <c:forEach var="book" items="${plank.books}">
-                            <li class="book" style="width: ${book.book.width}" data-detailsid="${book.bookDetailsID}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
+                            <li class="book" style="width: 15%" data-detailsid="${book.bookDetailsID}"><img style="top: ${plank.height - book.book.height}; height: ${book.book.height} " src="${goodreadsDAO.getImage(book.book.isbn)}""/></li>
                         </c:forEach>
                     </ul>
                 </li>
@@ -181,7 +181,7 @@
                     var imageurl = data[3];
                     var detailsID = data[4];
 
-                    var string = '<li class="book" style="width:'+ width +'" data-detailsid="' + detailsID + '"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>';
+                    var string = '<li class="book" style="width: 15%" data-detailsid="' + detailsID + '"><img style="top: ' + (plankheight - bookheight) + '; height: ' + bookheight +'" src="' + imageurl +'"/></li>';
                     var jquerystring = '#' + plankid + ' .booklist';
 
                     $(jquerystring).append(string);

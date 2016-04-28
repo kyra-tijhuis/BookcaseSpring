@@ -15,7 +15,7 @@
 </head>
 <body>
 <article id="mainscreen">
-    <p> Deze bookcase bestaat niet!
+    <p style="margin-left: 15%">Bookcase does not exist!
 
     </p>
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
