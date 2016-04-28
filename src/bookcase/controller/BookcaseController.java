@@ -28,15 +28,17 @@ public class BookcaseController {
     @Autowired
     private DataOperations dao;
 
-    @RequestMapping(value="/bookcase")
+    @RequestMapping(value="/bookcase/*")
     public String bookcases(HttpServletRequest request, HttpServletResponse resp, @ModelAttribute("error") String error, Model model) {
         ControllerFunctions.prepareLoginBar(request, error);
         try {
-            int ID = Integer.parseInt(request.getParameter("id"));
+            String url = request.getRequestURL().toString();
+            int ID = Integer.parseInt(url.substring(url.lastIndexOf("/")+1).toString());
             Bookcase b = dao.getBookcase(ID);
-            String username = dao.userNameFromBookcase(b);
-            if (b!=null) { // TODO check if bookcase exists in DB and import it
 
+            if (b!=null) {
+
+                String username = dao.userNameFromBookcase(b);
                 int height = -10;
                 for (Plank plank: b.getPlanks()) {
                     height += 15 + plank.getHeight();

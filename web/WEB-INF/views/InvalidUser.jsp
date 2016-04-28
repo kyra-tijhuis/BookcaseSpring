@@ -15,7 +15,7 @@
 </head>
 <body>
     <article id="mainscreen">
-        <p> Deze user bestaat niet!
+        <p style="margin-left: 15%">User does not exist!
 
         </p>
 
