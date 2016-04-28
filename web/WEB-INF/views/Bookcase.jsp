@@ -40,7 +40,7 @@
 
     <jsp:include page="LoginBar.jsp" />
     <style>
-        /*body { font-size: 62.5%; }*/
+        #dialog-form { font-size: 62.5%; }
         .formlabel, .forminput { display:block; }
         input.text { margin-bottom:12px; width:95%; padding: .4em; }
         fieldset { padding:0; border:0; margin-top:25px; }
@@ -78,11 +78,9 @@
     <h1>${bookcase.bookcaseName}</h1>
     <h4>A bookcase by ${userName}</h4>
 
-    <c:if test="${user == userName}">
-        <button id="addplankbutton">Add plank!</button>
-    </c:if>
 
-    <table id="bookcase" style="width: ${bookcase.width}; height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
+
+    <table id="bookcase" style="height: ${bookcaseheight}"><tr><td id="bookcaseleft"></td>
         <td id="plankcell"><ul id="planks">
             <li id="topplank"></li>
             <c:forEach var="plank" items="${bookcase.planks}">
@@ -99,15 +97,17 @@
         <td id="bookcaseright"></td>
     </tr></table>
     <c:if test="${user == userName}">
-        <table id="buttontable">
-            <ul id="buttonlist">
-                <c:forEach var="plank" items="${bookcase.planks}">
-                    <li class="buttons"  style="height: ${plank.height + 15}">
-                        <button class="addbutton" data-plankid="${plank.plankID}">Add book to this plank</button>
-                    </li>
-                </c:forEach>
-            </ul>
-        </table>
+        <ul id="buttonlist">
+            <c:forEach var="plank" items="${bookcase.planks}">
+                <li class="buttons"  style="height: ${plank.height + 15}">
+                    <button class="addbutton" data-plankid="${plank.plankID}"><img style="width: 50px;" src="resources/addbookbutton.jpg"></button>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
+
+    <c:if test="${user == userName}">
+        <button id="addplankbutton">Add plank!</button>
     </c:if>
 
     <a id="mainref" href="<c:url value="/index"/>">Return to front page</a>
@@ -221,7 +221,7 @@
                             var plankstring = '<li class="books" id="'+data+'" style="height: 300px"><ul class="booklist"></ul></li><li class="plank"></li>';
                             $('#planks').append(plankstring);
 
-                            var buttonstring = '<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '">Add book to this plank</button></li>';
+                            var buttonstring = '<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '"><img style="width: 50px;" src="resources/addbookbutton.jpg"></button></li>';
                             $('#buttonlist').append(buttonstring);
 
                         })

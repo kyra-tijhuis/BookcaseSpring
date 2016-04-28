@@ -7,11 +7,7 @@ h4 {
     text-align: center;
 }
 
-#bookcase {
-    height: 1000px;
-    margin-left: 20%;
-    background-color: floralwhite;
-}
+
 
 
 #bookcaseleft {
@@ -31,10 +27,13 @@ h4 {
 }
 
 #bookcase {
+    margin-left: 10%;
+    background-color: floralwhite;
     height: 95%;
-    width: 50%;
+    width: 60%;
     border-spacing: 0;
     border-collapse: collapse;
+    display: inline-block
 }
 
 #bookcase td {
@@ -50,6 +49,7 @@ h4 {
 
 #plankcell {
     height: 100%;
+    width: 90%;
     overflow: hidden;
 }
 
@@ -102,4 +102,17 @@ h4 {
 
 #buttonlist {
     list-style-type: none;
+    display: inline-block;
+    float: right;
+    margin-right: 20%;
+}
+
+#addplankbutton {
+    margin-left: 15%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.addbutton {
+    margin-top: 70%;
 }
