@@ -114,7 +114,7 @@ public class DataOperations {
         List<Bookcase> result = new ArrayList<>();
         List<Bookcase> temp = bookcaseDAO.getAllBookcases();
         for (Bookcase b : temp) {
-            if (bookcaseDAO.getUserFromBookcase(b).getUserName().equals(userName)) {
+            if (bookcaseDAO.getUserFromBookcase(b).getUserName().contains(userName)) {
                 result.add(b);
             }
         }
