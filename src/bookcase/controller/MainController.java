@@ -103,12 +103,14 @@ public class MainController {
     @RequestMapping(value="/search")
     public String searchGet(HttpServletRequest request, Model model, @ModelAttribute("error") String error, @ModelAttribute("SearchForm") @Valid SearchForm query) {
         List<Bookcase> bookcaseList;
+        System.out.println("\n");
 
         ControllerFunctions.prepareLoginBar(request, error);
-        System.out.println(query.getBookcaseName());
 
         if ((query.getBookcaseName() != null) && (!query.getBookcaseName().isEmpty())) {
             bookcaseList = dao.searchBookcaseName(query.getBookcaseName());
+        } else if ((query.getUsername() != null) && (!query.getUsername().isEmpty())) {
+            bookcaseList = dao.searchBookcasesUser(query.getUsername());
         } else {
             bookcaseList = dao.getAllBookcases();
         }
