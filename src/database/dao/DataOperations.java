@@ -104,4 +104,8 @@ public class DataOperations {
     public boolean correctPassword(String userName, String password) {
         return userDAO.correctPassword(userName, password);
     }
+
+    public List<Bookcase> searchBookcaseName(String bookcaseName) {
+        return bookcaseDAO.searchBookcases(bookcaseName);
+    }
 }

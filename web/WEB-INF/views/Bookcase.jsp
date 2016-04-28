@@ -213,19 +213,25 @@
                 plankid = $(this).data("plankid");
                 dialog.dialog( "open" );
             })
+
+            $('#addplankbutton').click(function() {
+                <c:url value="/addplank" var="targeturl"/>
+                $.post("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
+                    var plankstring = '<li class="books" id="'+data+'" style="height: 300px"><ul class="booklist"></ul></li><li class="plank"></li>';
+                    $('#planks').append(plankstring);
+
+                    var new_li = $('<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '"><img style="width: 50px;" src="resources/addbookbutton.jpg"></button></li>');
+                    $('#buttonlist').append(new_li);
+                    $('#buttonlist .addbutton:last-of-type').click(function() {
+                        plankid = $(this).data("plankid");
+                        dialog.dialog( "open" );
+                    });
+                })
+            })
         });
+
         $(document).ready(function() {
-                    $('#addplankbutton').click(function() {
-                        <c:url value="/addplank" var="targeturl"/>
-                        $.post("${targeturl}", {username:"${userName}", bookcaseID: "${bookcase.getBookcaseID()}"}, function(data) {
-                            var plankstring = '<li class="books" id="'+data+'" style="height: 300px"><ul class="booklist"></ul></li><li class="plank"></li>';
-                            $('#planks').append(plankstring);
 
-                            var buttonstring = '<li class="buttons" style="height: ' + 300 + '"><button class="addbutton" data-plankid="' + data + '"><img style="width: 50px;" src="resources/addbookbutton.jpg"></button></li>';
-                            $('#buttonlist').append(buttonstring);
-
-                        })
-                    })
 
                     <%--$('.book').click(function() {--%>
                         <%--<c:url value="/removebook" var="targeturl"/>--%>
