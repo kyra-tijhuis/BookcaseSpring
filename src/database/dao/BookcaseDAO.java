@@ -79,18 +79,56 @@ public class BookcaseDAO {
         return query.getResultList();
     }
 
+//    @Transactional
+//    public HashSet<Book> getAllBooks(Bookcase bookcase) {
+//        HashSet<Book> result = new HashSet<>();
+//        Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
+//        query.setParameter("bID", bookcase.getBookcaseID());
+//        for (Plank p : (List<Plank>)query.getResultList()) {
+//            Query bookQuery = em.createQuery("select p.books from Plank  as p fetch all properties where p.plankID = :pID");
+//            bookQuery.setParameter("pID", p.getPlankID());
+//            for (BookDetails bd : (List<BookDetails>)bookQuery.getResultList()) {
+//                result.add(bd.getBook());
+//                Book book = bd.getBook();
+//            }
+//        }
+//        return result;
+//    }
+
     @Transactional
-    public HashSet<Book> getAllBooks(Bookcase bookcase) {
-        HashSet<Book> result = new HashSet<>();
+    public List<Bookcase> searchBooks(String searchTerm) {
+        HashSet<Bookcase> resultSet = new HashSet<>();
+        for (Bookcase bookcase : getAllBookcases()) {
+            Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
+            query.setParameter("bID", bookcase.getBookcaseID());
+            for (Plank p : (List<Plank>)query.getResultList()) {
+                Query bookQuery = em.createQuery("select p.books from Plank  as p fetch all properties where p.plankID = :pID");
+                bookQuery.setParameter("pID", p.getPlankID());
+                for (BookDetails bd : (List<BookDetails>)bookQuery.getResultList()) {
+                    Book book = bd.getBook();
+                    if (book.getAuthor().contains(searchTerm) || book.getBookTitle().contains(searchTerm) || book.getIsbn().contains(searchTerm)) {
+                        resultSet.add(bookcase);
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(resultSet);
+    }
+
+    @Transactional
+    public boolean bookInBookcase(Bookcase bookcase, String searchTerm) {
         Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
         query.setParameter("bID", bookcase.getBookcaseID());
         for (Plank p : (List<Plank>)query.getResultList()) {
-            Query bookQuery = em.createQuery("select bd.book from BookDetails bd where plank = :plnk");
-            bookQuery.setParameter("plnk", p);
-            for (Book b : (List<Book>)bookQuery.getResultList()) {
-                result.add(b);
+            Query bookQuery = em.createQuery("select p.books from Plank  as p fetch all properties where p.plankID = :pID");
+            bookQuery.setParameter("pID", p.getPlankID());
+            for (BookDetails bd : (List<BookDetails>)bookQuery.getResultList()) {
+                Book book = bd.getBook();
+                if (book.getAuthor().contains(searchTerm) || book.getBookTitle().contains(searchTerm) || book.getIsbn().contains(searchTerm)) {
+                    return true;
+                }
             }
         }
-        return result;
+        return false;
     }
 }

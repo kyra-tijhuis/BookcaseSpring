@@ -111,6 +111,8 @@ public class MainController {
             bookcaseList = dao.searchBookcaseName(query.getBookcaseName());
         } else if ((query.getUsername() != null) && (!query.getUsername().isEmpty())) {
             bookcaseList = dao.searchBookcasesUser(query.getUsername());
+        } else if (query.getBookName() != null && !query.getBookName().isEmpty()) {
+            bookcaseList = dao.searchBooks(query.getBookName());
         } else {
             bookcaseList = dao.getAllBookcases();
         }

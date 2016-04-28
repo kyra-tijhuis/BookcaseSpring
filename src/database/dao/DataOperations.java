@@ -120,4 +120,14 @@ public class DataOperations {
         }
         return result;
     }
+
+    public List<Bookcase> searchBooks(String searchTerm) {
+        List<Bookcase> result = new ArrayList<>();
+        for (Bookcase bookcase : getAllBookcases()) {
+            if (bookcaseDAO.bookInBookcase(bookcase, searchTerm)) {
+                result.add(bookcase);
+            }
+        }
+        return result;
+    }
 }
