@@ -97,9 +97,9 @@ public class Book {
         int result = isbn.hashCode();
         result = 31 * result + bookTitle.hashCode();
         result = 31 * result + author.hashCode();
-        result = 31 * result + height;
-        result = 31 * result + width;
-        result = 31 * result + thickness;
+//        result = 31 * result + height;
+//        result = 31 * result + width;
+//        result = 31 * result + thickness;
         return result;
     }
 }

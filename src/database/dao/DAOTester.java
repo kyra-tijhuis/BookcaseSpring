@@ -2,11 +2,13 @@ package database.dao;
 
 import database.model.*;
 
+import java.util.List;
+
 /**
  * Created by Kyra on 15/04/2016.
  */
 public class DAOTester {
-      private void userTest() {
+    private void userTest() {
         UserDAO obj = new UserDAO();
         String userName = "Alice";
         obj.createUser(userName, "password");
@@ -54,8 +56,8 @@ public class DAOTester {
     public static void main(String[] args) {
         DAOTester obj = new DAOTester();
 //        obj.userTest();
-        obj.bookTest();
-        obj.putBookInBookcase();
+//        obj.bookTest();
+//        obj.putBookInBookcase();
 //        new BookcaseDAO().getAllBookcases();
         System.exit(0);
     }

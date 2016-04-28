@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -76,5 +77,20 @@ public class BookcaseDAO {
         Query query = em.createQuery("from Bookcase b where b.bookcaseName = :name");
         query.setParameter("name", searchTerm);
         return query.getResultList();
+    }
+
+    @Transactional
+    public HashSet<Book> getAllBooks(Bookcase bookcase) {
+        HashSet<Book> result = new HashSet<>();
+        Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
+        query.setParameter("bID", bookcase.getBookcaseID());
+        for (Plank p : (List<Plank>)query.getResultList()) {
+            Query bookQuery = em.createQuery("select bd.book from BookDetails bd where plank = :plnk");
+            bookQuery.setParameter("plnk", p);
+            for (Book b : (List<Book>)bookQuery.getResultList()) {
+                result.add(b);
+            }
+        }
+        return result;
     }
 }

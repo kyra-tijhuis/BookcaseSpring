@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -107,5 +108,16 @@ public class DataOperations {
 
     public List<Bookcase> searchBookcaseName(String bookcaseName) {
         return bookcaseDAO.searchBookcases(bookcaseName);
+    }
+
+    public List<Bookcase> searchBookcasesUser(String userName) {
+        List<Bookcase> result = new ArrayList<>();
+        List<Bookcase> temp = bookcaseDAO.getAllBookcases();
+        for (Bookcase b : temp) {
+            if (bookcaseDAO.getUserFromBookcase(b).getUserName().equals(userName)) {
+                result.add(b);
+            }
+        }
+        return result;
     }
 }
