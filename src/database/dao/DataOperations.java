@@ -41,7 +41,7 @@ public class DataOperations {
      * @param isbn
      * @param title
      * @param author
-     * @return book
+     * @return book with standard size
      */
     public Book createBook(String isbn, String title, String author) {
         Book existingBook = bookDAO.getBook(isbn);

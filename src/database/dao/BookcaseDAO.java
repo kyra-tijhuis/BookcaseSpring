@@ -19,8 +19,6 @@ public class BookcaseDAO {
 
     @Transactional
     public Bookcase getBookcase(int bookcaseID) {
-//        return em.find(Bookcase.class, bookcaseID);
-
         Bookcase bookcase = null;
         Query query = em.createQuery("from Bookcase b where bookcaseID= :bID");
         query.setParameter("bID", bookcaseID);
@@ -79,48 +77,12 @@ public class BookcaseDAO {
         return query.getResultList();
     }
 
-//    @Transactional
-//    public HashSet<Book> getAllBooks(Bookcase bookcase) {
-//        HashSet<Book> result = new HashSet<>();
-//        Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
-//        query.setParameter("bID", bookcase.getBookcaseID());
-//        for (Plank p : (List<Plank>)query.getResultList()) {
-//            Query bookQuery = em.createQuery("select p.books from Plank  as p fetch all properties where p.plankID = :pID");
-//            bookQuery.setParameter("pID", p.getPlankID());
-//            for (BookDetails bd : (List<BookDetails>)bookQuery.getResultList()) {
-//                result.add(bd.getBook());
-//                Book book = bd.getBook();
-//            }
-//        }
-//        return result;
-//    }
-
-    @Transactional
-    public List<Bookcase> searchBooks(String searchTerm) {
-        HashSet<Bookcase> resultSet = new HashSet<>();
-        for (Bookcase bookcase : getAllBookcases()) {
-            Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
-            query.setParameter("bID", bookcase.getBookcaseID());
-            for (Plank p : (List<Plank>)query.getResultList()) {
-                Query bookQuery = em.createQuery("select p.books from Plank  as p fetch all properties where p.plankID = :pID");
-                bookQuery.setParameter("pID", p.getPlankID());
-                for (BookDetails bd : (List<BookDetails>)bookQuery.getResultList()) {
-                    Book book = bd.getBook();
-                    if (book.getAuthor().contains(searchTerm) || book.getBookTitle().contains(searchTerm) || book.getIsbn().contains(searchTerm)) {
-                        resultSet.add(bookcase);
-                    }
-                }
-            }
-        }
-        return new ArrayList<>(resultSet);
-    }
-
     @Transactional
     public boolean bookInBookcase(Bookcase bookcase, String searchTerm) {
         Query query = em.createQuery("select b.planks from Bookcase b where b.bookcaseID = :bID");
         query.setParameter("bID", bookcase.getBookcaseID());
         for (Plank p : (List<Plank>)query.getResultList()) {
-            Query bookQuery = em.createQuery("select p.books from Plank  as p fetch all properties where p.plankID = :pID");
+            Query bookQuery = em.createQuery("select p.books from Plank as p fetch all properties where p.plankID = :pID");
             bookQuery.setParameter("pID", p.getPlankID());
             for (BookDetails bd : (List<BookDetails>)bookQuery.getResultList()) {
                 Book book = bd.getBook();
